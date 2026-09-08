@@ -1,0 +1,139 @@
+---
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+
+const nav = [
+  { href: '/career/', label: 'Career' },
+  { href: '/wedding/', label: 'Wedding' },
+  { href: '/travel/', label: 'Travel' },
+  { href: '/gaming/', label: 'Gaming' },
+  { href: '/anime/', label: 'Anime' },
+];
+
+const isActive = (href: string) => path === href.replace(/\/+$/, '');
+---
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <a class="wordmark" href="/">Lucky&nbsp;Sahani</a>
+
+    <nav aria-label="Sections">
+      <ul>
+        {nav.map((item) => (
+          <li>
+            <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <button id="theme-toggle" type="button" aria-label="Switch colour theme">
+      <span aria-hidden="true">◐</span>
+    </button>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    var btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var root = document.documentElement;
+      var current = root.getAttribute('data-theme');
+      var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var effective = current || (systemDark ? 'dark' : 'light');
+      var next = effective === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try {
+        localStorage.setItem('theme', next);
+      } catch (e) {
+        /* storage unavailable — the toggle still works for this page view */
+      }
+    });
+  })();
+</script>
+
+<style>
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+  }
+
+  .masthead-inner {
+    max-width: 78rem;
+    margin: 0 auto;
+    padding: 1.1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .wordmark {
+    font-family: var(--serif);
+    font-size: 1.12rem;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  nav {
+    margin-left: auto;
+  }
+
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1.4rem;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+  }
+
+  nav a:hover {
+    color: var(--ink);
+    border-bottom-color: var(--rule);
+  }
+
+  nav a[aria-current='page'] {
+    color: var(--ink);
+    border-bottom-color: var(--accent);
+  }
+
+  #theme-toggle {
+    background: none;
+    border: 1px solid var(--rule);
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    line-height: 1;
+    padding: 0.35rem 0.5rem;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+
+  #theme-toggle:hover {
+    color: var(--ink);
+    border-color: var(--ink-faint);
+  }
+
+  @media (max-width: 640px) {
+    nav { margin-left: 0; width: 100%; }
+    nav ul { gap: 1rem; }
+    #theme-toggle { position: absolute; right: 1.5rem; top: 1rem; }
+    .masthead-inner { position: relative; }
+  }
+</style>

@@ -1,0 +1,58 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="foot">
+  <div class="foot-inner">
+    <p class="label">Gurgaon, India</p>
+    <p class="links">
+      <a href="mailto:luckythegreat4@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/luckysahani" rel="me noopener">LinkedIn</a>
+      <a href="https://github.com/luckysahani" rel="me noopener">GitHub</a>
+    </p>
+    <p class="label">&copy; {year}</p>
+  </div>
+</footer>
+
+<style>
+  .foot {
+    border-top: 1px solid var(--rule);
+    margin-top: 5rem;
+  }
+
+  .foot-inner {
+    max-width: 78rem;
+    margin: 0 auto;
+    padding: 1.6rem 1.5rem 2.6rem;
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .links {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    gap: 1.3rem;
+  }
+
+  .links a {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink-soft);
+    border-bottom: 1px solid transparent;
+  }
+
+  .links a:hover {
+    color: var(--ink);
+    border-bottom-color: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    .links { margin: 0; width: 100%; }
+  }
+</style>

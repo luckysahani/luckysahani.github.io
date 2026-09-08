@@ -1,0 +1,21 @@
+---
+interface Props {
+  /** Figure number, e.g. "Fig. 1" */
+  n?: string;
+  /** Caption text — sits in the right margin beside the figure. */
+  caption?: string;
+}
+
+const { n, caption } = Astro.props;
+---
+
+<figure class="fig u-wide">
+  <div class="fig-body">
+    <slot />
+  </div>
+  <figcaption>
+    {n && <span class="fig-n">{n}</span>}
+    {caption && <p set:html={caption} />}
+    <slot name="caption" />
+  </figcaption>
+</figure>

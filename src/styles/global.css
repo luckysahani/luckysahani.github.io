@@ -1,0 +1,228 @@
+/* ============================================================
+   luckysahani.com — editorial design system
+   Light is the base. Dark is applied for both the un-stamped
+   system-preference case and the explicit data-theme stamp.
+   ============================================================ */
+
+:root {
+  /* ink & paper */
+  --paper:      #FAFAF8;
+  --surface:    #FFFFFF;
+  --ink:        #1A1714;
+  --ink-soft:   #5C5952;
+  --ink-faint:  #918D84;
+  --rule:       #DFDBD3;
+  --rule-soft:  #EBE8E1;
+  --accent:     #1B6F73;
+  --accent-soft:#E3EFEE;
+
+  /* type */
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --mono:  "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --step--1: clamp(0.82rem, 0.80rem + 0.10vw, 0.88rem);
+  --step-0:  clamp(1.06rem, 1.02rem + 0.20vw, 1.16rem);
+  --step-1:  clamp(1.28rem, 1.20rem + 0.40vw, 1.50rem);
+  --step-2:  clamp(1.60rem, 1.44rem + 0.80vw, 2.10rem);
+  --step-3:  clamp(2.05rem, 1.72rem + 1.65vw, 3.20rem);
+
+  /* rhythm */
+  --measure: 63ch;
+  --flow: 1.15em;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper:      #14181A;
+    --surface:    #1A1F21;
+    --ink:        #E8E4DC;
+    --ink-soft:   #A29D94;
+    --ink-faint:  #78736B;
+    --rule:       #2C3134;
+    --rule-soft:  #232829;
+    --accent:     #5CB6B6;
+    --accent-soft:#172B2B;
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper:      #14181A;
+  --surface:    #1A1F21;
+  --ink:        #E8E4DC;
+  --ink-soft:   #A29D94;
+  --ink-faint:  #78736B;
+  --rule:       #2C3134;
+  --rule-soft:  #232829;
+  --accent:     #5CB6B6;
+  --accent-soft:#172B2B;
+}
+
+/* ---------- base ---------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { color-scheme: light dark; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: var(--step-0);
+  font-weight: 400;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img, svg, video { max-width: 100%; height: auto; }
+
+a {
+  color: var(--ink);
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+a:hover { color: var(--accent); }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- editorial grid ----------
+   Three widths available to any child:
+     default   → the measure, ~63ch
+     .u-wide   → breaks out for figures + margin caption
+     .u-full   → edge to edge
+   Add .prose--notes on pages with figures to widen the right margin
+   so captions have somewhere to sit.
+------------------------------------- */
+
+.prose {
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(1.25rem, 1fr)
+    [wide-start] minmax(0, 5rem)
+    [main-start] min(100% - 2.5rem, var(--measure)) [main-end]
+    minmax(0, 5rem) [wide-end]
+    minmax(1.25rem, 1fr) [full-end];
+  row-gap: var(--flow);
+}
+
+/* Pages that carry figures reserve a right-hand margin for their captions.
+   Without this modifier the measure stays optically centred, so a page with
+   no figures never shows an empty gutter. */
+.prose--notes {
+  grid-template-columns:
+    [full-start] minmax(1.25rem, 1fr)
+    [wide-start] minmax(0, 5rem)
+    [main-start] min(100% - 2.5rem, var(--measure)) [main-end]
+    minmax(0, 13rem) [wide-end]
+    minmax(1.25rem, 1fr) [full-end];
+}
+
+.prose > *          { grid-column: main-start / main-end; min-width: 0; }
+.prose > .u-wide    { grid-column: wide-start / wide-end; }
+.prose > .u-full    { grid-column: full-start / full-end; }
+
+/* ---------- headings ---------- */
+
+h1, h2, h3 {
+  font-family: var(--serif);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin: 0;
+  color: var(--ink);
+}
+h1 { font-size: var(--step-3); }
+h2 { font-size: var(--step-2); margin-top: 0.6em; }
+h3 { font-size: var(--step-1); font-weight: 400; margin-top: 0.4em; }
+
+p { margin: 0; }
+p + p { margin-top: 0.75em; }
+
+/* ---------- utility type ---------- */
+
+.kicker {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.dek {
+  font-size: var(--step-1);
+  line-height: 1.45;
+  color: var(--ink-soft);
+  font-style: italic;
+  font-weight: 300;
+}
+
+.label {
+  font-family: var(--mono);
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.rule-line { height: 1px; background: var(--rule); border: 0; margin: 0; }
+
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* ---------- figure: wide body + margin caption ---------- */
+
+.fig {
+  margin: 0.6em 0;
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 12rem);
+  gap: 1.75rem;
+  align-items: start;
+}
+
+.fig-body {
+  min-width: 0;
+  overflow-x: auto;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  padding: 1.25rem 1rem;
+}
+
+.fig figcaption {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  line-height: 1.65;
+  color: var(--ink-faint);
+  padding-top: 0.15rem;
+}
+.fig figcaption .fig-n {
+  display: block;
+  color: var(--accent);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  font-size: 0.64rem;
+  margin-bottom: 0.5rem;
+}
+.fig figcaption strong { color: var(--ink-soft); font-weight: 600; }
+.fig figcaption p + p { margin-top: 0.6rem; }
+
+@media (max-width: 900px) {
+  .fig { grid-template-columns: 1fr; gap: 0.9rem; }
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

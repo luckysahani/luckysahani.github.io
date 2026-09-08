@@ -1,0 +1,111 @@
+---
+import Base from '../layouts/Base.astro';
+
+const sections = [
+  { href: '/career/',  label: 'Career',  note: 'Ten years of systems, and how they were built.' },
+  { href: '/wedding/', label: 'Wedding',  note: 'November 2026 — schedule, venue and travel.' },
+  { href: '/travel/',  label: 'Travel',   note: 'Where I have been, and where I am going next.' },
+  { href: '/gaming/',  label: 'Gaming',   note: 'A playtime record and an honest backlog.' },
+  { href: '/anime/',   label: 'Anime',    note: 'What I have watched and what is queued.' },
+];
+---
+
+<Base
+  title="Lucky Sahani"
+  description="Senior software engineer. Ten years at Amazon building distributed systems, most recently as an SDE III. Based in Gurgaon."
+  bare
+>
+  <article class="prose home">
+    <p class="kicker">Senior Software Engineer · Gurgaon</p>
+
+    <h1>I build and run large distributed systems.</h1>
+
+    <p class="dek">
+      Ten years at Amazon, Bengaluru to Seattle, most recently as a Senior SDE.
+      Now back in Gurgaon and looking for Senior or Staff engineering roles.
+    </p>
+
+    <hr class="rule-line" />
+
+    <p>
+      Most of my work has been platform engineering with real users on the other
+      end — seller-facing tools for Amazon's India marketplace, then internal
+      career-mobility products used by employees across fourteen countries and
+      forty-odd locales. What I keep coming back to is owning the whole
+      lifecycle: architecture, build, launch, and the pager afterwards.
+    </p>
+
+    <p>
+      I care about operational excellence more than most engineers I meet.
+      Continuous-deployment pipelines, alarms that actually page a human,
+      incident reviews written honestly, and technical debt quantified rather
+      than complained about.
+    </p>
+
+    <nav class="index u-wide" aria-label="Site sections">
+      <p class="label">Sections</p>
+      <ul>
+        {sections.map((s) => (
+          <li>
+            <a href={s.href}>
+              <span class="idx-label">{s.label}</span>
+              <span class="idx-note">{s.note}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </article>
+</Base>
+
+<style>
+  .home {
+    padding: clamp(3rem, 8vw, 6rem) 0 0;
+  }
+
+  .index {
+    margin-top: 2.4rem;
+    border-top: 1px solid var(--rule);
+    padding-top: 1.4rem;
+  }
+
+  .index ul {
+    list-style: none;
+    margin: 0.9rem 0 0;
+    padding: 0;
+  }
+
+  .index li + li {
+    border-top: 1px solid var(--rule-soft);
+  }
+
+  .index a {
+    display: grid;
+    grid-template-columns: minmax(0, 9rem) 1fr;
+    gap: 1.5rem;
+    align-items: baseline;
+    padding: 0.85rem 0;
+    text-decoration: none;
+  }
+
+  .idx-label {
+    font-family: var(--serif);
+    font-size: var(--step-1);
+    font-weight: 300;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+  }
+
+  .idx-note {
+    font-size: var(--step--1);
+    color: var(--ink-faint);
+    line-height: 1.5;
+  }
+
+  .index a:hover .idx-label { color: var(--accent); }
+  .index a:hover .idx-note  { color: var(--ink-soft); }
+
+  @media (max-width: 620px) {
+    .index a { grid-template-columns: 1fr; gap: 0.25rem; }
+  }
+</style>
