@@ -16,6 +16,8 @@ export interface WeddingEvent {
   name: string;
   time: string | null;
   venue: string;
+  /** Echoes the printed card's two inserts: green for 20 Nov, pink for 21 Nov. */
+  accent?: 'green' | 'pink';
   note?: string;
 }
 
@@ -33,37 +35,50 @@ export const headline = {
   place: 'AapnoGhar Resort, Gurugram',
 };
 
+/**
+ * Names, times and halls below are transcribed from the printed card —
+ * the green insert (20 Nov) and the pink insert (21 Nov) — so the site
+ * and the card never disagree in a guest's hands.
+ *
+ * `card: true` marks an event that appears on the printed card.
+ * Pheras and Vidai carry the video invite's times; they are not on the
+ * card at all.
+ */
 export const events: WeddingEvent[] = [
   {
     day: 'Friday',
     date: '20 November',
-    name: 'Mehendi & Welcome Lunch',
-    time: null,
-    venue: 'Swagatam Hall & Bhanwar Party Lawn',
+    name: 'Mehendi',
+    time: '11:00 am onwards',
+    venue: 'Swagatam Hall',
+    accent: 'green',
     note: 'Lunch is served through the afternoon as guests arrive.',
   },
   {
     day: 'Friday',
     date: '20 November',
-    name: 'Sangeet & Engagement',
-    time: null,
+    name: 'Engagement & Sangeet',
+    time: '7:00 pm onwards',
     venue: 'Bhanwar Party Lawn',
+    accent: 'green',
     note: 'Music winds up at 10 pm — a venue rule, not ours.',
   },
   {
     day: 'Saturday',
     date: '21 November',
-    name: 'Haldi',
-    time: null,
+    name: 'Haldi Utsav',
+    time: '10:00 am onwards',
     venue: 'Room Side Garden',
+    accent: 'pink',
     note: 'Wear something you do not mind turning yellow.',
   },
   {
     day: 'Saturday',
     date: '21 November',
-    name: 'Wedding & Dinner',
-    time: null,
+    name: 'Shubh Vivah',
+    time: '7:00 pm onwards',
     venue: 'Chander Party Lawn',
+    accent: 'pink',
     note: 'Dinner through the evening; the ceremony runs late into the night.',
   },
   {
@@ -72,7 +87,8 @@ export const events: WeddingEvent[] = [
     name: 'Pheras',
     time: '2:00 am',
     venue: 'Chander Party Lawn',
-    note: 'The heart of it. Early hours of Sunday morning.',
+    accent: 'pink',
+    note: 'The heart of it, in the early hours of Sunday morning.',
   },
   {
     day: 'Sunday',
@@ -80,6 +96,7 @@ export const events: WeddingEvent[] = [
     name: 'Vidai',
     time: '4:00 am',
     venue: 'Chander Party Lawn',
+    accent: 'pink',
   },
 ];
 

@@ -88,8 +88,13 @@ const names =
                   <li class="sched-item">
                     <h3 class="ev-name">{e.name}</h3>
                     <p class="ev-meta">
-                      {e.time ? <span class="ev-time">{e.time}</span>
-                              : <span class="slot slot-sm">time</span>}
+                      {e.time ? (
+                        <span class={`ev-time ${e.accent ? `ev-time--${e.accent}` : ''}`}>
+                          {e.time}
+                        </span>
+                      ) : (
+                        <span class="slot slot-sm">time</span>
+                      )}
                       <span class="ev-venue">{e.venue}</span>
                     </p>
                     {e.note && <p class="ev-note">{e.note}</p>}
@@ -163,22 +168,35 @@ const names =
 </Base>
 
 <style>
-  /* A warmer accent than the site default, drawn from the photograph.
-     Scoped to this page only. */
+  /* A warmer palette than the site default, scoped to this page.
+     --wed comes from the photograph; the green and pink echo the card's
+     two inserts. Light is the base; dark is applied both for the
+     un-stamped system-preference case and the explicit stamp. */
   .wed {
     --wed: #A3323F;
     --wed-soft: #F4E6E7;
+    --card-green: #1C6F68;
+    --card-green-soft: #DFEEEC;
+    --card-pink: #B32357;
+    --card-pink-soft: #FAE2EA;
   }
-  :global(:root[data-theme='dark']) .wed,
-  :global(:root:not([data-theme='light'])) .wed {
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .wed {
+      --wed: #E08A92;
+      --wed-soft: #2C1A1C;
+      --card-green: #63BDB2;
+      --card-green-soft: #15302D;
+      --card-pink: #EE8AAC;
+      --card-pink-soft: #331623;
+    }
+  }
+  :global(:root[data-theme='dark']) .wed {
     --wed: #E08A92;
     --wed-soft: #2C1A1C;
-  }
-  @media (prefers-color-scheme: light) {
-    :global(:root:not([data-theme='dark'])) .wed {
-      --wed: #A3323F;
-      --wed-soft: #F4E6E7;
-    }
+    --card-green: #63BDB2;
+    --card-green-soft: #15302D;
+    --card-pink: #EE8AAC;
+    --card-pink-soft: #331623;
   }
 
   /* ---- hero ---- */
@@ -350,6 +368,9 @@ const names =
     gap: 0.55rem;
     margin-top: 0.35rem;
   }
+  /* The time chip carries the colour of the card insert the event was
+     printed on — teal for the 20th, rose for the 21st — so the site and
+     the card read as one piece. */
   .ev-time {
     font-family: var(--mono);
     font-size: 0.76rem;
@@ -357,6 +378,15 @@ const names =
     color: var(--wed);
     background: var(--wed-soft);
     padding: 0.15rem 0.45rem;
+    white-space: nowrap;
+  }
+  .ev-time--green {
+    color: var(--card-green);
+    background: var(--card-green-soft);
+  }
+  .ev-time--pink {
+    color: var(--card-pink);
+    background: var(--card-pink-soft);
   }
   .ev-venue {
     font-size: 0.95rem;
