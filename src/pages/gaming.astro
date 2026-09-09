@@ -1,17 +1,283 @@
 ---
 import Base from '../layouts/Base.astro';
+import { stats, hero, played, brief, series, neverPlayed } from '../data/gaming';
+
+// Single-series magnitude chart: one hue, linear scale, no legend — the
+// heading names the measure. Counter-Strike 2 is excluded and shown as a
+// hero number instead; on a shared axis it would flatten every other bar
+// to a sliver.
+const max = Math.max(...played.map((g) => g.hours));
+const bars = played.map((g) => ({ ...g, pct: (g.hours / max) * 100 }));
 ---
 
-<Base title="Gaming" description="A playtime record and an honest backlog.">
-  <article class="prose page">
+<Base
+  title="Gaming"
+  description="Thirteen years on Steam: 174 games, 5,587 hours, and one of them accounts for four fifths of it."
+>
+  <article class="prose gaming">
     <p class="kicker">Gaming</p>
-    <h1>Gaming</h1>
-    <p class="dek">A playtime record and an honest backlog.</p>
+    <h1>Thirteen years, 174 games, one obsession.</h1>
+    <p class="dek">
+      Steam has kept an unflattering, precise record since September 2013. The
+      headline is that I own a great many games and have meaningfully played
+      almost none of them.
+    </p>
+
     <hr class="rule-line" />
-    <p>This section is being written.</p>
+
+    <section>
+      <dl class="stats">
+        <div><dt class="tabular">{stats.owned}</dt><dd>games owned</dd></div>
+        <div><dt class="tabular">{stats.played}</dt><dd>ever launched</dd></div>
+        <div><dt class="tabular">{stats.never}</dt><dd>never opened</dd></div>
+        <div><dt class="tabular">{stats.hours.toLocaleString()}</dt><dd>hours played</dd></div>
+      </dl>
+      <p class="aside">
+        Those hours are {stats.days} days — near enough eight months of
+        continuous play, spread across thirteen years.
+      </p>
+    </section>
+
+    <hr class="rule-line" />
+
+    <section class="hero-stat">
+      <p class="label">Where it all went</p>
+      <p class="hero-num tabular">{hero.hours.toLocaleString()}<span class="hero-unit">hours</span></p>
+      <p class="hero-game">{hero.game}</p>
+      <p class="hero-note">
+        <strong>{hero.share}% of everything.</strong> Every other game I have
+        ever played, added together, comes to about a fifth of this one. Last
+        played {hero.lastPlayed}, which is to say it never really stopped.
+      </p>
+    </section>
+
+    <hr class="rule-line" />
+
+    <section class="u-wide">
+      <p class="label">Everything else, by hours</p>
+      <p class="sec-lede">
+        Counter-Strike is left off this chart on purpose — on a shared axis it
+        turns every other bar into a sliver.
+      </p>
+      <ol class="chart">
+        {bars.map((g) => (
+          <li class="row">
+            <span class="row-name">{g.name}</span>
+            <span class="row-bar" title={`${g.name} — ${g.hours} hours, last played ${g.last}`}>
+              <span class="row-fill" style={`width:${g.pct}%`}></span>
+            </span>
+            <span class="row-val tabular">{g.hours}</span>
+            <span class="row-last">{g.last}</span>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section>
+      <p class="label">Then everything under ten hours</p>
+      <ul class="chips">
+        {brief.map((n) => <li class="chip">{n}</li>)}
+      </ul>
+    </section>
+
+    <hr class="rule-line" />
+
+    <section class="u-wide">
+      <p class="label">Series I keep going back to</p>
+      <ol class="series">
+        {series.map((s) => (
+          <li>
+            <div class="s-head">
+              <span class="s-name">{s.name}</span>
+              <span class="s-meta tabular">{s.titles} titles · {s.hours} hrs</span>
+            </div>
+            <p class="s-note">{s.note}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <hr class="rule-line" />
+
+    <section>
+      <p class="label">Owned, never launched</p>
+      <p class="sec-lede">
+        {stats.never} of the {stats.owned} have never been opened once — three
+        quarters of the library. A sale is a very effective way of feeling like
+        you have played something.
+      </p>
+      <ul class="chips">
+        {neverPlayed.map((n) => <li class="chip chip--never">{n}</li>)}
+      </ul>
+      <p class="aside">
+        Red Dead Redemption 2. Portal. Mass Effect 2. I own them. I have opened
+        none of them.
+      </p>
+    </section>
   </article>
 </Base>
 
 <style>
-  .page { padding: clamp(3rem, 8vw, 5rem) 0 0; }
+  .gaming { padding: clamp(3rem, 8vw, 5rem) 0 0; }
+  .sec-lede { color: var(--ink-soft); max-width: 58ch; }
+  .aside {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: var(--ink-faint);
+    font-style: italic;
+    max-width: 56ch;
+  }
+
+  /* ---- stat tiles ---- */
+
+  .stats {
+    margin: 0.9rem 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    gap: 1.4rem 1.8rem;
+  }
+  .stats dt {
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    line-height: 1;
+    color: var(--ink);
+    font-weight: 300;
+  }
+  .stats dd {
+    margin: 0.4rem 0 0;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* ---- hero number ---- */
+
+  .hero-stat { padding: 0.4rem 0; }
+  .hero-num {
+    font-size: clamp(3rem, 9vw, 5.4rem);
+    line-height: 1;
+    font-weight: 300;
+    color: var(--accent);
+    letter-spacing: -0.03em;
+    margin-top: 0.5rem;
+  }
+  .hero-unit {
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-left: 0.6rem;
+  }
+  .hero-game {
+    font-size: var(--step-1);
+    color: var(--ink);
+    margin-top: 0.3rem;
+  }
+  .hero-note {
+    margin-top: 0.8rem;
+    color: var(--ink-soft);
+    max-width: 54ch;
+  }
+  .hero-note strong { color: var(--ink); font-weight: 600; }
+
+  /* ---- bar chart ---- */
+
+  .chart { list-style: none; margin: 1.2rem 0 0; padding: 0; }
+  .row {
+    display: grid;
+    grid-template-columns: minmax(0, 15rem) 1fr 3.4rem 5rem;
+    gap: 0.9rem;
+    align-items: center;
+    padding: 0.34rem 0;
+  }
+  .row-name {
+    font-size: 0.94rem;
+    color: var(--ink);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .row-bar {
+    height: 9px;
+    background: var(--rule-soft);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .row-fill {
+    display: block;
+    height: 100%;
+    background: var(--accent);
+    border-radius: 0 4px 4px 0;
+  }
+  .row-val {
+    font-family: var(--mono);
+    font-size: 0.76rem;
+    color: var(--ink-soft);
+    text-align: right;
+  }
+  .row-last {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* ---- series ---- */
+
+  .series { list-style: none; margin: 1.2rem 0 0; padding: 0; }
+  .series li {
+    padding: 0.95rem 0;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .series li:last-child { border-bottom: 1px solid var(--rule-soft); }
+  .s-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+  .s-name { font-size: 1.14rem; color: var(--ink); }
+  .s-meta {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .s-note { margin-top: 0.25rem; font-size: 0.95rem; color: var(--ink-soft); }
+
+  /* ---- chips ---- */
+
+  .chips {
+    list-style: none;
+    margin: 0.9rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+  .chip {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    border: 1px solid var(--rule);
+    padding: 0.28rem 0.66rem;
+    border-radius: 2px;
+    background: var(--surface);
+  }
+  .chip--never { color: var(--ink-faint); border-style: dashed; }
+
+  @media (max-width: 720px) {
+    .row {
+      grid-template-columns: 1fr 3.2rem;
+      gap: 0.3rem 0.7rem;
+    }
+    .row-name { grid-column: 1; }
+    .row-val { grid-column: 2; }
+    .row-bar { grid-column: 1 / -1; }
+    .row-last { display: none; }
+    .row { padding: 0.5rem 0; border-bottom: 1px solid var(--rule-soft); }
+  }
 </style>
