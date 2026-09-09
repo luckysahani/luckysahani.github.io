@@ -20,9 +20,10 @@ export interface WeddingEvent {
 }
 
 export const couple = {
-  bride: null as string | null,
-  groom: null as string | null,
-  hashtag: null as string | null,
+  /** Display order, exactly as the two names read on the page. */
+  nameOne: 'Lucky Sahani' as string | null,
+  nameTwo: 'Kanchan Kumari' as string | null,
+  hashtag: '#KanchanGotLucky' as string | null,
   hostLine: null as string | null,
 };
 

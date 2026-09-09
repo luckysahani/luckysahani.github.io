@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import hero from '../assets/wedding/hero.jpg';
 import { couple, headline, events, venue, faqs, rsvp } from '../data/wedding';
@@ -12,11 +12,29 @@ for (const e of events) {
   if (found) found.items.push(e);
   else days.push({ key, day: e.day, date: e.date, items: [e] });
 }
+
+// The invite travels on WhatsApp, so the link has to unfurl with the
+// names and the photograph. JPEG rather than WebP for the widest
+// compatibility across chat clients.
+const ogImage = await getImage({
+  src: hero,
+  width: 1200,
+  height: 630,
+  fit: 'cover',
+  position: 'center',
+  format: 'jpeg',
+});
+
+const names =
+  couple.nameOne && couple.nameTwo
+    ? `${couple.nameOne} & ${couple.nameTwo}`
+    : 'Our wedding';
 ---
 
 <Base
   title="Wedding"
-  description="Everything you need for the celebration — schedule, venue, travel and the practical details."
+  description={`${names} — ${headline.date}, ${headline.place}. Schedule, travel and everything you need to know.`}
+  ogImage={ogImage.src}
   noindex
 >
   <div class="wed">
@@ -35,9 +53,9 @@ for (const e of events) {
       <div class="hero-text">
         <p class="wed-kicker">We're getting married</p>
         <h1 class="hero-names">
-          {couple.bride ?? <span class="slot">Bride</span>}
+          {couple.nameOne ?? <span class="slot">Name</span>}
           <span class="amp">&amp;</span>
-          {couple.groom ?? <span class="slot">Groom</span>}
+          {couple.nameTwo ?? <span class="slot">Name</span>}
         </h1>
         <p class="hero-date">{headline.shortDate}</p>
         <p class="hero-where">{headline.date}<br />{headline.place}</p>
