@@ -2,6 +2,7 @@
 import { Image, getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import hero from '../assets/wedding/hero.jpg';
+import Monogram from '../components/Monogram.astro';
 import { couple, headline, events, venue, faqs, rsvp } from '../data/wedding';
 
 // Group events by the day they fall on, preserving order.
@@ -72,7 +73,11 @@ const names =
         of practical details worth knowing before you set off.
       </p>
 
-      <hr class="rule-line" />
+      <div class="crest">
+        <span class="crest-line"></span>
+        <Monogram size={30} />
+        <span class="crest-line"></span>
+      </div>
 
       <section class="u-wide">
         <p class="label">The celebration</p>
@@ -139,7 +144,11 @@ const names =
         </dl>
       </section>
 
-      <hr class="rule-line" />
+      <div class="crest">
+        <span class="crest-line"></span>
+        <Monogram size={30} />
+        <span class="crest-line"></span>
+      </div>
 
       <section class="rsvp">
         <p class="label">RSVP</p>
@@ -197,6 +206,25 @@ const names =
     --card-green-soft: #15302D;
     --card-pink: #EE8AAC;
     --card-pink-soft: #331623;
+  }
+
+  /* ---- crest divider ----
+     The monogram from the card's chhatri, breaking a hairline rule.
+     Used twice, opening and closing the practical detail — the card
+     treats it as a crest rather than as every rule. */
+
+  .crest {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    color: var(--wed);
+    margin: 0.9rem 0;
+  }
+
+  .crest-line {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
   }
 
   /* ---- hero ---- */
