@@ -1,0 +1,66 @@
+---
+/** Unified seller notification platform, 2018–2019. */
+---
+<svg class="dg" viewBox="0 0 760 300" role="img"
+     aria-label="Two ingress paths feed one notification service, which dispatches to WhatsApp, SMS and email; provider status callbacks return through a Lambda into DynamoDB delivery tracking.">
+  <!-- service boundary -->
+  <rect class="band" x="166" y="14" width="248" height="200"/>
+  <rect class="band-edge" x="166" y="14" width="248" height="200"/>
+  <text class="ttl" x="290" y="34" text-anchor="middle">Notification Service</text>
+
+  <!-- ingress -->
+  <rect class="node" x="10" y="46" width="112" height="44"/>
+  <text class="lbl" x="66" y="66" text-anchor="middle">Seller events</text>
+  <text class="sub" x="66" y="80" text-anchor="middle">event bus</text>
+
+  <rect class="node" x="10" y="130" width="112" height="44"/>
+  <text class="lbl" x="66" y="150" text-anchor="middle">BI query → S3</text>
+  <text class="sub" x="66" y="164" text-anchor="middle">scheduled batch</text>
+
+  <path class="flow" d="M122 68h32M122 152h32"/>
+  <path class="head" d="M162 68l-8-4v8z"/>
+  <path class="head" d="M162 152l-8-4v8z"/>
+
+  <!-- service internals -->
+  <rect class="node" x="184" y="46" width="212" height="36"/>
+  <text class="lbl" x="290" y="68" text-anchor="middle">Template engine</text>
+  <rect class="node" x="184" y="94" width="212" height="36"/>
+  <text class="lbl" x="290" y="116" text-anchor="middle">Opt-in &amp; preferences</text>
+  <rect class="node" x="184" y="142" width="212" height="36"/>
+  <text class="lbl" x="290" y="164" text-anchor="middle">Dispatcher · retries</text>
+  <text class="win" x="290" y="200" text-anchor="middle">99%+ line coverage</text>
+
+  <!-- fan-out -->
+  <path class="flow" d="M414 112h30M444 56v112M444 56h8M444 112h8M444 168h8"/>
+  <path class="head" d="M460 56l-8-4v8z"/>
+  <path class="head" d="M460 112l-8-4v8z"/>
+  <path class="head" d="M460 168l-8-4v8z"/>
+
+  <rect class="node" x="462" y="34" width="116" height="44"/>
+  <text class="lbl" x="520" y="60" text-anchor="middle">WhatsApp</text>
+  <rect class="node" x="462" y="90" width="116" height="44"/>
+  <text class="lbl" x="520" y="116" text-anchor="middle">SMS</text>
+  <rect class="node" x="462" y="146" width="116" height="44"/>
+  <text class="lbl" x="520" y="172" text-anchor="middle">Email</text>
+
+  <path class="flow" d="M578 112h36"/>
+  <path class="head" d="M622 112l-8-4v8z"/>
+  <rect class="node" x="624" y="90" width="126" height="44"/>
+  <text class="lbl" x="687" y="110" text-anchor="middle">Providers</text>
+  <text class="sub" x="687" y="124" text-anchor="middle">status callbacks</text>
+
+  <!-- the return path is the point -->
+  <path class="flow--back" d="M687 134v118h-52"/>
+  <path class="head--back" d="M627 252l8-4v8z"/>
+
+  <rect class="node" x="470" y="230" width="156" height="44"/>
+  <text class="lbl" x="548" y="250" text-anchor="middle">Lambda</text>
+  <text class="sub" x="548" y="264" text-anchor="middle">status reconciliation</text>
+
+  <path class="flow" d="M470 252h-42"/>
+  <path class="head" d="M420 252l8-4v8z"/>
+
+  <rect class="node node--key" x="166" y="230" width="248" height="44"/>
+  <text class="lbl" x="290" y="250" text-anchor="middle">DynamoDB · delivery tracking</text>
+  <text class="sub" x="290" y="264" text-anchor="middle">concatenated keys · O(1) lookup</text>
+</svg>

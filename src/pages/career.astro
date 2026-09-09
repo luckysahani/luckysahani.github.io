@@ -1,17 +1,292 @@
 ---
 import Base from '../layouts/Base.astro';
+import Figure from '../components/Figure.astro';
+import NotificationPlatform from '../components/diagrams/NotificationPlatform.astro';
+import CareerProfilePlatform from '../components/diagrams/CareerProfilePlatform.astro';
+import ConfigSync from '../components/diagrams/ConfigSync.astro';
+import BounceMonitoring from '../components/diagrams/BounceMonitoring.astro';
+import { thesis, metrics, systems, arc, principles, leadership, ask } from '../data/career';
+
+const diagrams = [NotificationPlatform, CareerProfilePlatform, ConfigSync, BounceMonitoring];
 ---
 
-<Base title="Career" description="Ten years of systems, and how they were built.">
-  <article class="prose page">
-    <p class="kicker">Career</p>
-    <h1>Career</h1>
-    <p class="dek">Ten years of systems, and how they were built.</p>
+<Base
+  title="Career"
+  description="Ten years at Amazon building distributed systems — seller marketplace tools, career-mobility platforms and logistics. Four systems, drawn."
+>
+  <article class="prose prose--notes career">
+    <p class="kicker">{thesis.kicker}</p>
+    <h1>{thesis.headline}</h1>
+    <p class="dek">{thesis.dek}</p>
+
     <hr class="rule-line" />
-    <p>This section is being written.</p>
+
+    <section>
+      <p class="label">The numbers that hold up</p>
+      <dl class="metrics">
+        {metrics.map((m) => (
+          <div class="metric">
+            <dt><span class="m-value tabular">{m.value}</span> <span class="m-label">{m.label}</span></dt>
+            <dd>{m.detail}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <hr class="rule-line" />
+
+    <section>
+      <p class="label">Four systems</p>
+      <p class="sec-lede">
+        The work I would most want to be asked about. Each of these is drawn
+        rather than described, because the shape is the argument.
+      </p>
+    </section>
+
+    {systems.map((s, i) => {
+      const Diagram = diagrams[i];
+      return (
+        <>
+          <section class="system">
+            <p class="sys-years">{s.years}</p>
+            <h2>{s.title}</h2>
+            <p>{s.lede}</p>
+          </section>
+
+          <Figure n={s.n} caption={s.caption}>
+            <Diagram />
+          </Figure>
+
+          <section class="system">
+            <p class="hard"><span class="hard-tag">What was hard</span> {s.hard}</p>
+          </section>
+        </>
+      );
+    })}
+
+    <hr class="rule-line" />
+
+    <section>
+      <p class="label">The arc</p>
+      <ol class="arc">
+        {arc.map((r) => (
+          <li>
+            <div class="arc-when">
+              <span class="arc-period tabular">{r.period}</span>
+              <span class="arc-place">{r.place}</span>
+            </div>
+            <div class="arc-what">
+              <h3>{r.title}</h3>
+              <p>{r.blurb}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <hr class="rule-line" />
+
+    <section>
+      <p class="label">How I work</p>
+      <dl class="principles">
+        {principles.map((p) => (
+          <div>
+            <dt>{p.title}</dt>
+            <dd>{p.body}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <hr class="rule-line" />
+
+    <section>
+      <p class="label">Multiplying others</p>
+      <p class="sec-lede">{leadership.lede}</p>
+      <ul class="lead-list">
+        {leadership.items.map((i) => <li>{i}</li>)}
+      </ul>
+    </section>
+
+    <hr class="rule-line" />
+
+    <section class="ask">
+      <p class="label">{ask.lede}</p>
+      <p class="ask-body">{ask.body}</p>
+      <p class="ask-links">
+        {ask.links.map((l) => (
+          <a href={l.href} rel={l.href.startsWith('http') ? 'me noopener' : undefined}>{l.label}</a>
+        ))}
+      </p>
+    </section>
   </article>
 </Base>
 
 <style>
-  .page { padding: clamp(3rem, 8vw, 5rem) 0 0; }
+  .career {
+    padding: clamp(3rem, 8vw, 5.5rem) 0 0;
+  }
+
+  .sec-lede {
+    color: var(--ink-soft);
+    max-width: 58ch;
+  }
+
+  /* ---- metrics ---- */
+
+  .metrics {
+    margin: 1.1rem 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--rule);
+  }
+  .metric {
+    padding: 0.95rem 1.1rem 0.95rem 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .metric dt {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .m-value {
+    font-size: 1.3rem;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+  .m-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .metric dd {
+    margin: 0.3rem 0 0;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    max-width: 34ch;
+  }
+
+  /* ---- systems ---- */
+
+  .system + .system { margin-top: 0; }
+
+  .sys-years {
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.13em;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+  }
+
+  .hard {
+    border-left: 2px solid var(--rule);
+    padding-left: 1rem;
+    color: var(--ink-soft);
+  }
+  .hard-tag {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  /* ---- arc ---- */
+
+  .arc {
+    list-style: none;
+    margin: 1.2rem 0 0;
+    padding: 0;
+  }
+  .arc li {
+    display: grid;
+    grid-template-columns: minmax(0, 10rem) 1fr;
+    gap: 1.75rem;
+    padding: 1.4rem 0;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .arc li:last-child { border-bottom: 1px solid var(--rule-soft); }
+
+  .arc-when { display: flex; flex-direction: column; gap: 0.3rem; padding-top: 0.35rem; }
+  .arc-period { font-size: 1.02rem; color: var(--ink); }
+  .arc-place {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    line-height: 1.5;
+  }
+  .arc-what h3 { font-size: 1.16rem; margin: 0; }
+  .arc-what p { margin-top: 0.4rem; color: var(--ink-soft); font-size: 0.98rem; }
+
+  /* ---- principles ---- */
+
+  .principles {
+    margin: 1.1rem 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 1.5rem 2rem;
+  }
+  .principles dt {
+    font-size: 1.06rem;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .principles dd {
+    margin: 0.35rem 0 0;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+
+  /* ---- leadership ---- */
+
+  .lead-list {
+    margin: 1rem 0 0;
+    padding-left: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    color: var(--ink-soft);
+  }
+  .lead-list li { padding-left: 0.25rem; }
+  .lead-list::marker { color: var(--accent); }
+
+  /* ---- ask ---- */
+
+  .ask-body {
+    font-size: var(--step-1);
+    line-height: 1.45;
+    color: var(--ink);
+    max-width: 52ch;
+    margin-top: 0.6rem;
+  }
+  .ask-links {
+    margin-top: 1.4rem;
+    display: flex;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+  }
+  .ask-links a {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 0.6rem 1.05rem;
+  }
+  .ask-links a:hover { background: var(--accent-soft); }
+
+  @media (max-width: 620px) {
+    .arc li { grid-template-columns: 1fr; gap: 0.5rem; }
+    .arc-when { flex-direction: row; align-items: baseline; gap: 0.7rem; flex-wrap: wrap; }
+  }
 </style>

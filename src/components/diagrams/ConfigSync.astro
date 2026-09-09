@@ -1,0 +1,42 @@
+---
+/** Event-driven cross-service configuration sync. */
+---
+<svg class="dg" viewBox="0 0 760 232" role="img"
+     aria-label="A configuration object dropped in S3 flows through SNS to a FIFO queue, a validating Lambda and a Step Functions approval gate, then lands as an idempotent write in the consuming service's config store.">
+  <rect class="node" x="8" y="54" width="104" height="44"/>
+  <text class="lbl" x="60" y="74" text-anchor="middle">S3</text>
+  <text class="sub" x="60" y="88" text-anchor="middle">config object</text>
+
+  <path class="flow" d="M112 76h20"/><path class="head" d="M140 76l-8-4v8z"/>
+
+  <rect class="node" x="142" y="54" width="96" height="44"/>
+  <text class="lbl" x="190" y="80" text-anchor="middle">SNS</text>
+
+  <path class="flow" d="M238 76h20"/><path class="head" d="M266 76l-8-4v8z"/>
+
+  <rect class="node node--key" x="268" y="54" width="118" height="44"/>
+  <text class="lbl" x="327" y="74" text-anchor="middle">SQS FIFO</text>
+  <text class="sub" x="327" y="88" text-anchor="middle">ordered delivery</text>
+
+  <path class="flow" d="M386 76h20"/><path class="head" d="M414 76l-8-4v8z"/>
+
+  <rect class="node" x="416" y="54" width="124" height="44"/>
+  <text class="lbl" x="478" y="74" text-anchor="middle">Lambda</text>
+  <text class="sub" x="478" y="88" text-anchor="middle">schema validation</text>
+
+  <path class="flow" d="M540 76h20"/><path class="head" d="M568 76l-8-4v8z"/>
+
+  <rect class="node" x="570" y="54" width="150" height="44"/>
+  <text class="lbl" x="645" y="74" text-anchor="middle">Step Functions</text>
+  <text class="sub" x="645" y="88" text-anchor="middle">manual approval gate</text>
+
+  <path class="flow" d="M645 98v46"/>
+  <path class="head" d="M645 152l-4-8h8z"/>
+
+  <rect class="node node--key" x="470" y="154" width="250" height="48"/>
+  <text class="lbl" x="595" y="176" text-anchor="middle">Consuming service · config store</text>
+  <text class="sub" x="595" y="190" text-anchor="middle">idempotent upsert — replay is safe</text>
+
+  <text class="win" x="60" y="176">Removes manual drift between</text>
+  <text class="win" x="60" y="190">independently-owned services</text>
+</svg>

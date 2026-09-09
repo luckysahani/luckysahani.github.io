@@ -1,0 +1,47 @@
+---
+/** Real-time email bounce monitoring. */
+---
+<svg class="dg" viewBox="0 0 760 262" role="img"
+     aria-label="Provider bounce events flow through SNS and SQS into a Lambda that classifies them per template. The Lambda writes an S3 archive and emits per-template CloudWatch metrics, which feed composite alarms and a daily EventBridge report.">
+  <rect class="node" x="8" y="46" width="122" height="44"/>
+  <text class="lbl" x="69" y="66" text-anchor="middle">Provider</text>
+  <text class="sub" x="69" y="80" text-anchor="middle">bounce event</text>
+
+  <path class="flow" d="M130 68h24"/><path class="head" d="M162 68l-8-4v8z"/>
+  <rect class="node" x="164" y="46" width="94" height="44"/>
+  <text class="lbl" x="211" y="72" text-anchor="middle">SNS</text>
+
+  <path class="flow" d="M258 68h24"/><path class="head" d="M290 68l-8-4v8z"/>
+  <rect class="node" x="292" y="46" width="94" height="44"/>
+  <text class="lbl" x="339" y="72" text-anchor="middle">SQS</text>
+
+  <path class="flow" d="M386 68h24"/><path class="head" d="M418 68l-8-4v8z"/>
+  <rect class="node node--key" x="420" y="46" width="142" height="44"/>
+  <text class="lbl" x="491" y="66" text-anchor="middle">Lambda</text>
+  <text class="sub" x="491" y="80" text-anchor="middle">classify per template</text>
+
+  <!-- metrics chain runs down the right; the archive branches away below,
+       so nothing crosses anything else -->
+  <path class="flow" d="M562 68h34"/><path class="head" d="M604 68l-8-4v8z"/>
+  <rect class="node node--key" x="606" y="46" width="146" height="44"/>
+  <text class="lbl" x="679" y="66" text-anchor="middle">CloudWatch</text>
+  <text class="sub" x="679" y="80" text-anchor="middle">per-template metrics</text>
+
+  <path class="flow" d="M679 90v26"/><path class="head" d="M679 124l-4-8h8z"/>
+  <rect class="node" x="606" y="126" width="146" height="44"/>
+  <text class="lbl" x="679" y="146" text-anchor="middle">14 alarms</text>
+  <text class="sub" x="679" y="160" text-anchor="middle">including composites</text>
+
+  <path class="flow" d="M679 170v26"/><path class="head" d="M679 204l-4-8h8z"/>
+  <rect class="node" x="576" y="206" width="176" height="44"/>
+  <text class="lbl" x="664" y="226" text-anchor="middle">EventBridge</text>
+  <text class="sub" x="664" y="240" text-anchor="middle">daily report</text>
+
+  <path class="flow" d="M491 90v56"/><path class="head" d="M491 154l-4-8h8z"/>
+  <rect class="node" x="420" y="156" width="142" height="44"/>
+  <text class="lbl" x="491" y="176" text-anchor="middle">S3</text>
+  <text class="sub" x="491" y="190" text-anchor="middle">archive</text>
+
+  <text class="win" x="8" y="176">Detection time</text>
+  <text class="win" x="8" y="190">10 days → under 12 hours</text>
+</svg>

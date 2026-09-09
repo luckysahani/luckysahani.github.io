@@ -226,3 +226,77 @@ p + p { margin-top: 0.75em; }
     scroll-behavior: auto !important;
   }
 }
+
+/* ---- architecture diagrams ----
+   Shared visual language for the /career figures. Everything reads from
+   the theme tokens so both light and dark resolve as a set. */
+
+.dg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-width: 620px;
+}
+
+.dg .node {
+  fill: var(--surface);
+  stroke: var(--rule);
+  stroke-width: 1.4;
+}
+.dg .node--key {
+  stroke: var(--accent);
+  stroke-width: 1.6;
+}
+
+.dg .band {
+  fill: var(--accent);
+  opacity: 0.055;
+}
+.dg .band-edge {
+  fill: none;
+  stroke: var(--rule);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 3;
+}
+
+.dg .lbl {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  fill: var(--ink);
+}
+.dg .sub {
+  font-family: var(--mono);
+  font-size: 8.5px;
+  fill: var(--ink-faint);
+}
+.dg .ttl {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  fill: var(--ink-faint);
+  text-transform: uppercase;
+}
+.dg .win {
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 500;
+  fill: var(--accent);
+}
+
+.dg .flow {
+  fill: none;
+  stroke: var(--ink-soft);
+  stroke-width: 1.3;
+}
+.dg .flow--back {
+  fill: none;
+  stroke: var(--ink-faint);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 3;
+}
+.dg .head {
+  fill: var(--ink-soft);
+}
+.dg .head--back {
+  fill: var(--ink-faint);
+}
