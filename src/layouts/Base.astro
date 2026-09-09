@@ -8,9 +8,12 @@ interface Props {
   description: string;
   /** Omit the site name suffix — used on the home page. */
   bare?: boolean;
+  /** Keep the page out of search results. Used for guest-facing pages
+      that are shared by link rather than found. */
+  noindex?: boolean;
 }
 
-const { title, description, bare = false } = Astro.props;
+const { title, description, bare = false, noindex = false } = Astro.props;
 const fullTitle = bare ? title : `${title} · Lucky Sahani`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -22,6 +25,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={fullTitle} />
