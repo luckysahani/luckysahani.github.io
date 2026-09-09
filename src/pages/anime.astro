@@ -1,17 +1,192 @@
 ---
 import Base from '../layouts/Base.astro';
+import { thesis, topTier, newest, tiers, completed, backlog } from '../data/anime';
+
+const counted =
+  topTier.length +
+  newest.length +
+  tiers.reduce((n, t) => n + t.states.reduce((m, s) => m + s.titles.length, 0), 0) +
+  completed.length +
+  backlog.length;
 ---
 
-<Base title="Anime" description="What I have watched and what is queued.">
-  <article class="prose page">
-    <p class="kicker">Anime</p>
-    <h1>Anime</h1>
-    <p class="dek">What I have watched and what is queued.</p>
+<Base
+  title="Anime"
+  description="A tiered watchlist kept in browser bookmarks for years, rebuilt four times — and the backlog that made the tiers necessary."
+>
+  <article class="prose anime">
+    <p class="kicker">{thesis.kicker}</p>
+    <h1>{thesis.headline}</h1>
+    <p class="dek">{thesis.dek}</p>
+
     <hr class="rule-line" />
-    <p>This section is being written.</p>
+
+    <section>
+      <p class="label">Top tier</p>
+      <p class="sec-lede">
+        Eight, and the list has been remarkably stable. Three of them have been on
+        it longer than I have owned the laptop it lives on.
+      </p>
+      <ul class="chips">
+        {topTier.map((t) => <li class="chip chip--top">{t}</li>)}
+      </ul>
+    </section>
+
+    <section>
+      <p class="label">Newest additions</p>
+      <ul class="chips">
+        {newest.map((t) => <li class="chip">{t}</li>)}
+      </ul>
+    </section>
+
+    <hr class="rule-line" />
+
+    <section>
+      <p class="label">The filing system</p>
+      <p class="sec-lede">
+        Two tiers, and each tier has states. The states are the useful part — a
+        list of titles tells you nothing, but "aired and unstarted" is a decision
+        waiting to be made.
+      </p>
+    </section>
+
+    {tiers.map((tier) => (
+      <section class="tier">
+        <h2>{tier.name}</h2>
+        <p class="tier-gloss">{tier.gloss}</p>
+        <dl class="states">
+          {tier.states.map((s) => (
+            <div class="state">
+              <dt>
+                <span class="state-name">{s.state}</span>
+                {s.note && <span class="state-note">{s.note}</span>}
+              </dt>
+              <dd>
+                <ul class="chips">
+                  {s.titles.map((t) => <li class="chip">{t}</li>)}
+                </ul>
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    ))}
+
+    <hr class="rule-line" />
+
+    <section>
+      <p class="label">Finished</p>
+      <ul class="chips">
+        {completed.map((t) => <li class="chip chip--done">{t}</li>)}
+      </ul>
+      <p class="aside">
+        One. The folder is called Completed and it has one thing in it, which
+        tells you most of what you need to know about the rest of this page.
+      </p>
+    </section>
+
+    <hr class="rule-line" />
+
+    <section>
+      <p class="label">The backlog</p>
+      <p class="sec-lede">
+        Untiered, unsorted, {backlog.length} deep. Every one of these was added
+        with genuine intent.
+      </p>
+      <ul class="backlog">
+        {backlog.map((t) => <li>{t}</li>)}
+      </ul>
+      <p class="aside">{counted} titles on this page. No links — a good share of
+        the originals point somewhere I would rather not send anyone.</p>
+    </section>
   </article>
 </Base>
 
 <style>
-  .page { padding: clamp(3rem, 8vw, 5rem) 0 0; }
+  .anime { padding: clamp(3rem, 8vw, 5rem) 0 0; }
+
+  .sec-lede { color: var(--ink-soft); max-width: 58ch; }
+
+  .aside {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: var(--ink-faint);
+    font-style: italic;
+    max-width: 56ch;
+  }
+
+  .chips {
+    list-style: none;
+    margin: 0.9rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+  .chip {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+    border: 1px solid var(--rule);
+    padding: 0.3rem 0.7rem;
+    border-radius: 2px;
+    background: var(--surface);
+  }
+  .chip--top {
+    color: var(--ink);
+    border-color: var(--accent);
+  }
+  .chip--done {
+    color: var(--ink-faint);
+    text-decoration: line-through;
+    text-decoration-color: var(--rule);
+  }
+
+  .tier { margin-top: 0.4rem; }
+  .tier h2 { font-size: var(--step-2); }
+  .tier-gloss {
+    color: var(--ink-soft);
+    font-style: italic;
+    margin-top: 0.2rem;
+  }
+
+  .states { margin: 1.2rem 0 0; }
+  .state {
+    padding: 1rem 0;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .state:last-child { border-bottom: 1px solid var(--rule-soft); }
+  .state dt {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+  }
+  .state-name {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .state-note {
+    font-size: 0.9rem;
+    color: var(--ink-faint);
+    font-style: italic;
+  }
+  .state dd { margin: 0; }
+
+  .backlog {
+    margin: 1.1rem 0 0;
+    padding: 0;
+    list-style: none;
+    columns: 3 14rem;
+    column-gap: 2rem;
+  }
+  .backlog li {
+    break-inside: avoid;
+    padding: 0.32rem 0;
+    font-size: 0.94rem;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--rule-soft);
+  }
 </style>
