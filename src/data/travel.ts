@@ -34,6 +34,31 @@ export const trips: Trip[] = [
       'home for good — the kind of move you only make once.',
   },
   {
+    slug: 'alaska',
+    place: 'Alaska',
+    region: 'Palmer & Delta Junction',
+    when: 'Earlier',
+    year: 'Earlier',
+    status: 'past',
+    coords: [-149.9003, 61.2181],
+    note:
+      'An ATV run out of Palmer, and the Castner Glacier ice cave up near Delta ' +
+      'Junction — you walk into a river of blue that is very obviously older than ' +
+      'anything you have ever touched.',
+  },
+  {
+    slug: 'cherrapunjee',
+    place: 'Cherrapunjee',
+    region: 'Meghalaya',
+    when: 'Earlier',
+    year: 'Earlier',
+    status: 'past',
+    coords: [91.7323, 25.2702],
+    note:
+      'Ten days across the North East, and this was the anchor — one of the wettest ' +
+      'inhabited places on the planet, which it spends the whole time proving.',
+  },
+  {
     slug: 'texas',
     place: 'Dallas & Houston',
     region: 'Texas',
@@ -160,7 +185,7 @@ export const places: Place[] = [
   { name: 'Bengaluru', where: 'Karnataka', when: '2016–2021', coords: [77.5946, 12.9716], status: 'past' },
 
   // United States
-  { name: 'Alaska', where: 'United States', when: 'Earlier', coords: [-149.9003, 61.2181], status: 'past' },
+  { name: 'Alaska', where: 'Palmer & Delta Junction', when: 'Earlier', coords: [-149.9003, 61.2181], status: 'past' },
   { name: 'New York', where: 'New York', when: 'Dec 2024', coords: [-73.9857, 40.7484], status: 'past' },
   { name: 'Las Vegas', where: 'Nevada', when: 'Jan 2025', coords: [-115.1398, 36.1699], status: 'past' },
   { name: 'Portland', where: 'Oregon', when: 'Aug 2025', coords: [-122.6784, 45.5152], status: 'past' },
@@ -182,16 +207,23 @@ export const places: Place[] = [
   { name: 'Triund & Kheerganga', where: 'Himachal Pradesh', when: 'Earlier', coords: [76.3234, 32.2432], status: 'past' },
   { name: 'Bir Billing', where: 'Himachal Pradesh', when: 'Earlier', coords: [76.7218, 32.0415], status: 'past' },
   { name: 'Sikkim', where: 'North East', when: 'Earlier', coords: [88.6065, 27.533], status: 'past' },
-  { name: 'North East circuit', where: 'Ten days', when: 'Earlier', coords: [91.7362, 26.1445], status: 'past' },
+  { name: 'Cherrapunjee', where: 'Meghalaya', when: 'Earlier', coords: [91.7323, 25.2702], status: 'past' },
 
   // India — south & west
   { name: 'Alleppey', where: 'Kerala', when: 'Jan 2026', coords: [76.3388, 9.4981], status: 'past' },
-  { name: 'Varkala', where: 'Kerala', when: 'Jan 2026', coords: [76.7166, 8.7379], status: 'past' },
+  { name: 'Varkala & Paravur', where: 'Kerala', when: 'Jan 2026', coords: [76.7166, 8.7379], status: 'past' },
   { name: 'Munnar', where: 'Kerala', when: 'Earlier', coords: [77.0595, 10.0889], status: 'past' },
   { name: 'Wayanad', where: 'Kerala', when: 'Earlier', coords: [76.132, 11.6854], status: 'past' },
   { name: 'Ooty', where: 'Tamil Nadu', when: 'Earlier', coords: [76.695, 11.4064], status: 'past' },
   { name: 'Coorg', where: 'Karnataka', when: 'Earlier', coords: [75.7382, 12.3375], status: 'past' },
   { name: 'Goa', where: 'Goa', when: 'Earlier', coords: [73.8278, 15.2993], status: 'past' },
+
+  { name: 'Mysuru', where: 'Karnataka', when: 'Earlier', coords: [76.6394, 12.2958], status: 'past' },
+  { name: 'Agra', where: 'Uttar Pradesh', when: 'Earlier', coords: [78.0081, 27.1767], status: 'past' },
+  { name: 'Kanpur', where: 'Uttar Pradesh', when: '2012–2016', coords: [80.3319, 26.4499], status: 'past' },
+  { name: 'Indore', where: 'Madhya Pradesh', when: 'Earlier', coords: [75.8577, 22.7196], status: 'past' },
+  { name: 'Chennai', where: 'Tamil Nadu', when: 'Earlier', coords: [80.2707, 13.0827], status: 'past' },
+  { name: 'Yercaud', where: 'Tamil Nadu', when: 'Earlier', coords: [78.2097, 11.775], status: 'past' },
 
   // Ahead
   { name: 'Vaishno Devi', where: 'Jammu & Kashmir', when: 'Oct 2026', coords: [74.9319, 32.9917], status: 'ahead' },
