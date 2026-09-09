@@ -1,17 +1,262 @@
 ---
 import Base from '../layouts/Base.astro';
+import TripMap from '../components/TripMap.astro';
+import { trips, places, europe, wishlist } from '../data/travel';
+
+const ahead = trips.filter((t) => t.status === 'ahead');
+const past = trips.filter((t) => t.status === 'past');
+
+// Places that already have a prose card above shouldn't repeat in the index.
+const told = new Set(trips.map((t) => t.place.split(' & ')[0]));
+const groups = [
+  { title: 'India', match: (p: (typeof places)[number]) => p.coords[0] > 60 && p.coords[0] < 100 },
+  { title: 'United States', match: (p: (typeof places)[number]) => p.coords[0] < -60 },
+];
+const indexed = groups.map((g) => ({
+  title: g.title,
+  items: places.filter((p) => p.status === 'past' && g.match(p) && !told.has(p.name)),
+}));
 ---
 
-<Base title="Travel" description="Where I have been, and where I am going next.">
-  <article class="prose page">
+<Base
+  title="Travel"
+  description="Where I have been and where I am going next — India, the Indian Ocean, and two weeks in Europe."
+>
+  <article class="prose prose--notes travel">
     <p class="kicker">Travel</p>
-    <h1>Travel</h1>
-    <p class="dek">Where I have been, and where I am going next.</p>
+    <h1>Where I have been, and where I am going next.</h1>
+    <p class="dek">
+      Ten years of it happened around a job in another country. Most of what
+      follows is the year that changed that — coming home, getting married, and
+      the trips stacked either side.
+    </p>
+
+    <TripMap places={places} />
+
     <hr class="rule-line" />
-    <p>This section is being written.</p>
+
+    <section>
+      <p class="label">Ahead</p>
+      <ol class="trips">
+        {ahead.map((t) => (
+          <li id={`trip-${t.slug}`} class="trip trip--ahead">
+            <div class="trip-when">
+              <span class="trip-date">{t.when}</span>
+              <span class="trip-region">{t.region}</span>
+            </div>
+            <div class="trip-what">
+              <h2>{t.place}</h2>
+              <p>{t.note}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="europe u-wide">
+      <p class="label">{europe.title}</p>
+      <p class="sec-lede">{europe.lede}</p>
+      <ol class="legs">
+        {europe.legs.map((l) => (
+          <li>
+            <span class="leg-n tabular">{l.nights}</span>
+            <span class="leg-unit">nights</span>
+            <span class="leg-base">{l.base}</span>
+            <span class="leg-what">{l.what}</span>
+          </li>
+        ))}
+      </ol>
+      <p class="caveat">{europe.caveat}</p>
+    </section>
+
+    <hr class="rule-line" />
+
+    <section>
+      <p class="label">Been</p>
+      <ol class="trips">
+        {past.map((t) => (
+          <li id={`trip-${t.slug}`} class="trip">
+            <div class="trip-when">
+              <span class="trip-date">{t.when}</span>
+              <span class="trip-region">{t.region}</span>
+            </div>
+            <div class="trip-what">
+              <h2>{t.place}</h2>
+              <p>{t.note}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <hr class="rule-line" />
+
+    <section class="u-wide">
+      <p class="label">Everywhere else</p>
+      <p class="sec-lede">
+        The rest of the record, without the commentary. Anything from December
+        2024 onward is dated from a location history; the earlier ones are from
+        memory, so they are dated loosely on purpose.
+      </p>
+      <div class="wish">
+        {indexed.map((g) => (
+          <div class="wish-group">
+            <h3>{g.title}</h3>
+            <ul>
+              {g.items.map((i) => (
+                <li>
+                  <span class="w-place">{i.name}</span>
+                  <span class="w-season">{i.when}</span>
+                  <span class="w-note">{i.where}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <hr class="rule-line" />
+
+    <section class="u-wide">
+      <p class="label">Someday</p>
+      <p class="sec-lede">
+        A running list, kept honest by a season column — half the mistakes in
+        Indian travel are going to the right place in the wrong month.
+      </p>
+      <div class="wish">
+        {wishlist.map((g) => (
+          <div class="wish-group">
+            <h3>{g.title}</h3>
+            <ul>
+              {g.items.map((i) => (
+                <li>
+                  <span class="w-place">{i.place}</span>
+                  <span class="w-season">{i.season}</span>
+                  <span class="w-note">{i.note}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
   </article>
 </Base>
 
 <style>
-  .page { padding: clamp(3rem, 8vw, 5rem) 0 0; }
+  .travel { padding: clamp(3rem, 8vw, 5rem) 0 0; }
+
+  .sec-lede { color: var(--ink-soft); max-width: 58ch; }
+
+  .map-wrap { margin-top: 0.6rem; }
+
+  /* ---- trips ---- */
+
+  .trips { list-style: none; margin: 1.1rem 0 0; padding: 0; }
+
+  .trip {
+    display: grid;
+    grid-template-columns: minmax(0, 10rem) 1fr;
+    gap: 1.75rem;
+    padding: 1.4rem 0;
+    border-top: 1px solid var(--rule-soft);
+    scroll-margin-top: 5rem;
+  }
+  .trip:last-child { border-bottom: 1px solid var(--rule-soft); }
+
+  .trip-when { display: flex; flex-direction: column; gap: 0.3rem; padding-top: 0.4rem; }
+  .trip-date { font-size: 0.98rem; color: var(--ink); }
+  .trip-region {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    line-height: 1.5;
+  }
+
+  .trip-what h2 { font-size: 1.32rem; margin: 0; }
+  .trip-what p { margin-top: 0.4rem; color: var(--ink-soft); font-size: 0.98rem; }
+
+  .trip--ahead .trip-date { color: var(--accent); }
+
+  /* ---- europe ---- */
+
+  .europe { margin-top: 1.6rem; }
+
+  .legs { list-style: none; margin: 1.2rem 0 0; padding: 0; }
+  .legs li {
+    display: grid;
+    grid-template-columns: 2.4rem 3.4rem minmax(0, 11rem) 1fr;
+    gap: 0.9rem;
+    align-items: baseline;
+    padding: 0.7rem 0;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .legs li:last-child { border-bottom: 1px solid var(--rule-soft); }
+  .leg-n { font-size: 1.25rem; color: var(--ink); text-align: right; }
+  .leg-unit {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .leg-base { font-size: 1.05rem; color: var(--ink); }
+  .leg-what { font-size: 0.94rem; color: var(--ink-soft); }
+
+  .caveat {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: var(--ink-faint);
+    font-style: italic;
+    max-width: 56ch;
+  }
+
+  /* ---- wishlist ---- */
+
+  .wish {
+    margin-top: 1.3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 1.8rem 2.4rem;
+  }
+  .wish-group h3 {
+    font-size: 1.06rem;
+    margin: 0 0 0.55rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .wish-group ul { list-style: none; margin: 0; padding: 0; }
+  .wish-group li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.2rem 0.8rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .w-place { font-size: 1rem; color: var(--ink); }
+  .w-season {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+    text-align: right;
+  }
+  .w-note {
+    grid-column: 1 / -1;
+    font-size: 0.88rem;
+    color: var(--ink-faint);
+  }
+
+  @media (max-width: 620px) {
+    .trip { grid-template-columns: 1fr; gap: 0.5rem; }
+    .trip-when { flex-direction: row; align-items: baseline; gap: 0.7rem; flex-wrap: wrap; }
+    .legs li { grid-template-columns: 2.4rem 1fr; row-gap: 0.15rem; }
+    .legs .leg-base { grid-column: 2; }
+    .legs .leg-what { grid-column: 2; }
+  }
 </style>

@@ -300,3 +300,51 @@ p + p { margin-top: 0.75em; }
 .dg .head--back {
   fill: var(--ink-faint);
 }
+
+/* ---- travel map ----
+   Static equirectangular plot. Class names are namespaced because these
+   live in the global sheet — `.land` or `.pin` alone would be a landmine. */
+
+.tmap { margin: 0.6rem 0 0; }
+
+.tmap-body {
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+}
+
+.tmap-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-width: 560px;
+}
+
+.tmap-land {
+  fill: var(--rule-soft);
+  stroke: var(--rule);
+  stroke-width: 0.7;
+  stroke-linejoin: round;
+}
+
+.tmap-pin--past { fill: var(--ink-soft); }
+.tmap-pin--ahead { fill: var(--accent); }
+
+.tmap-cap {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  margin-top: 0.65rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  flex-wrap: wrap;
+}
+.tmap-key { display: inline-flex; align-items: center; gap: 0.4rem; }
+.tmap-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.tmap-dot--past { background: var(--ink-soft); }
+.tmap-dot--ahead { background: var(--accent); }
+.tmap-src { margin-left: auto; text-transform: none; letter-spacing: 0.04em; }
