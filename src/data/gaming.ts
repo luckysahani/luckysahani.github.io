@@ -87,7 +87,7 @@ export const series: Series[] = [
   { name: 'Age of Empires', titles: 2, hours: 26.2, note: 'III got the hours; IV got a weekend.' },
 ];
 
-/** Owned, never launched. The good ones, so the shame lands properly. */
+/** In the library and queued — the ones worth getting to. */
 export const neverPlayed: string[] = [
   'Red Dead Redemption 2',
   'Portal',

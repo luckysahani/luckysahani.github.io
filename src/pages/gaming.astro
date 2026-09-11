@@ -18,19 +18,19 @@ const bars = played.map((g) => ({ ...g, pct: (g.hours / max) * 100 }));
     <p class="kicker">Gaming</p>
     <h1>Thirteen years, 174 games, one obsession.</h1>
     <p class="dek">
-      Steam has kept an unflattering, precise record since September 2013. The
-      headline is that I own a great many games and have meaningfully played
-      almost none of them.
+      Steam has kept a precise record since September 2013 — thirteen years of
+      it. Long campaigns, a lot of strategy, and one competitive shooter I have
+      never really stopped playing.
     </p>
 
     <hr class="rule-line" />
 
     <section>
       <dl class="stats">
-        <div><dt class="tabular">{stats.owned}</dt><dd>games owned</dd></div>
-        <div><dt class="tabular">{stats.played}</dt><dd>ever launched</dd></div>
-        <div><dt class="tabular">{stats.never}</dt><dd>never opened</dd></div>
+        <div><dt class="tabular">{stats.owned}</dt><dd>games in the library</dd></div>
+        <div><dt class="tabular">{stats.played}</dt><dd>played</dd></div>
         <div><dt class="tabular">{stats.hours.toLocaleString()}</dt><dd>hours played</dd></div>
+        <div><dt class="tabular">{stats.memberSince.split(' ')[1]}</dt><dd>on Steam since</dd></div>
       </dl>
       <p class="aside">
         Those hours are {stats.days} days — near enough eight months of
@@ -100,19 +100,14 @@ const bars = played.map((g) => ({ ...g, pct: (g.hours / max) * 100 }));
     <hr class="rule-line" />
 
     <section>
-      <p class="label">Owned, never launched</p>
+      <p class="label">Next up</p>
       <p class="sec-lede">
-        {stats.never} of the {stats.owned} have never been opened once — three
-        quarters of the library. A sale is a very effective way of feeling like
-        you have played something.
+        Thirteen years of sales have built a good queue. These are the ones I
+        actually intend to get to.
       </p>
       <ul class="chips">
-        {neverPlayed.map((n) => <li class="chip chip--never">{n}</li>)}
+        {neverPlayed.map((n) => <li class="chip chip--next">{n}</li>)}
       </ul>
-      <p class="aside">
-        Red Dead Redemption 2. Portal. Mass Effect 2. I own them. I have opened
-        none of them.
-      </p>
     </section>
   </article>
 </Base>
@@ -267,7 +262,7 @@ const bars = played.map((g) => ({ ...g, pct: (g.hours / max) * 100 }));
     border-radius: 2px;
     background: var(--surface);
   }
-  .chip--never { color: var(--ink-faint); border-style: dashed; }
+  .chip--next { color: var(--ink-soft); border-color: var(--rule); }
 
   @media (max-width: 720px) {
     .row {
