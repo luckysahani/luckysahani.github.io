@@ -18,9 +18,9 @@ export const thesis = {
   kicker: 'Anime',
   headline: 'Two traditions, ranked by everyone else.',
   dek:
-    'I watch across both Chinese and Japanese animation, which are far more ' +
-    'different than the word "anime" suggests. These are the ten best-regarded ' +
-    'of each from my list — ordered by world rating rather than by my taste.',
+    'I watch both Chinese and Japanese animation. These are the ten ' +
+    'best-regarded of each from my list, ordered by world rating rather than ' +
+    'by what I would have put first.',
 };
 
 export interface Ranked {
@@ -59,7 +59,7 @@ export const japanese: Ranked[] = [
 ];
 
 export const note =
-  'Scores are MyAnimeList, read in September 2026. Where a search resolved to ' +
-  'a particular season or film rather than the whole run, that entry is named ' +
-  'underneath — and the vote count is there because a 7.92 from a few hundred ' +
-  'people is a different claim from an 8.58 from three million.';
+  'Scores are MyAnimeList, read in September 2026. Where a search landed on a ' +
+  'particular season or film rather than the whole run, that entry is named ' +
+  'underneath. The vote count is shown too: a 7.92 from a few hundred people ' +
+  'and an 8.58 from three million are not the same measurement.';

@@ -4,9 +4,9 @@ import { thesis, chinese, japanese, note } from '../data/anime';
 
 const sections = [
   { key: 'cn', title: 'Chinese', sub: 'Donghua', rows: chinese,
-    lede: 'Cultivation epics, mostly — long runs, and a rating pool far smaller than the Japanese side, which is worth holding in mind when comparing the two columns.' },
+    lede: 'Cultivation epics, mostly, and long runs — often hundreds of episodes. The rating pools here are much smaller than on the Japanese side.' },
   { key: 'jp', title: 'Japanese', sub: 'Anime', rows: japanese,
-    lede: 'The canon, more or less. Every one of these is rated by hundreds of thousands of people at minimum.' },
+    lede: 'The canon, more or less. Nothing here is rated by fewer than a few hundred thousand people.' },
 ];
 
 const maxRaters = Math.max(...[...chinese, ...japanese].map((r) => r.raters));

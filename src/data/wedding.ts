@@ -61,7 +61,7 @@ export const events: WeddingEvent[] = [
     time: '7:00 pm onwards',
     venue: 'Bhanwar Party Lawn',
     accent: 'green',
-    note: 'Music winds up at 10 pm — a venue rule, not ours.',
+    note: 'Music has to stop at 10 pm — the venue’s rule, so the dancing starts early.',
   },
   {
     day: 'Saturday',
@@ -88,7 +88,7 @@ export const events: WeddingEvent[] = [
     time: '2:00 am',
     venue: 'Chander Party Lawn',
     accent: 'pink',
-    note: 'The heart of it, in the early hours of Sunday morning.',
+    note: 'The ceremony itself, in the early hours of Sunday morning.',
   },
   {
     day: 'Sunday',
@@ -119,39 +119,39 @@ export interface Faq {
 export const faqs: Faq[] = [
   {
     q: 'Do I need to carry ID?',
-    a: 'Yes, and this one matters — the resort requires photo ID with address proof at check-in for every adult. Aadhaar, passport, driving licence or voter ID all work. Guests travelling on a foreign passport need the passport and a valid visa.',
+    a: 'Yes — please do not forget this one. The resort asks every adult for photo ID with address proof at check-in. Aadhaar, passport, driving licence or voter ID all work. If you are travelling on a foreign passport, bring the passport and a valid visa.',
   },
   {
     q: 'Is the food vegetarian?',
-    a: 'Entirely. The resort is a vegetarian complex, so no non-vegetarian food is served or permitted from outside. The menus are large — chaat counters, live pasta and pizza, a fruit counter and several desserts.',
+    a: 'Entirely. The resort is a vegetarian complex, so no non-vegetarian food is served or brought in. The menus are generous — chaat counters, live pasta and pizza, a fruit counter and several desserts.',
   },
   {
     q: 'Can I bring alcohol?',
-    a: 'Outside liquor is not permitted in the lawns. Anything being served is arranged through the venue.',
+    a: 'Outside liquor is not allowed in the lawns. Anything served is arranged through the venue.',
   },
   {
     q: 'When does the music stop?',
-    a: 'The venue does not allow a DJ or amplified music after 10 pm on either night. The celebration carries on — it just gets quieter.',
+    a: 'The venue does not allow a DJ or amplified music after 10 pm on either night.',
   },
   {
     q: 'What about parking?',
-    a: 'There is parking on site. Cars have to stay in the parking area — no vehicles are allowed into the lawns or the room blocks, including for unloading.',
+    a: 'There is parking on site. Cars stay in the parking area — no vehicles are allowed into the lawns or the room blocks, even for unloading.',
   },
   {
     q: 'Can I bring my dog?',
-    a: 'Sadly not. The resort does not permit pets on the premises.',
+    a: 'No — the resort does not allow pets on the premises.',
   },
   {
     q: 'Are the water park and rides included?',
-    a: 'No — the amusement park and water park sit on the same grounds but are not part of the wedding package. Tickets are bought separately if you fancy it.',
+    a: 'They sit on the same grounds but are not part of the wedding package. Tickets are sold separately.',
   },
   {
     q: 'Are children welcome?',
-    a: 'Very. A good number of families are bringing children, and there is plenty of open ground for them.',
+    a: 'Yes, very. Plenty of families are bringing children, and there is a lot of open ground to run around in.',
   },
   {
     q: 'What are check-in and check-out?',
-    a: 'Rooms open at 1:00 pm and check-out is 10:30 am. If you are staying both nights this only matters on the way in and the way out.',
+    a: 'Rooms open at 1:00 pm and check-out is 10:30 am.',
   },
 ];
 

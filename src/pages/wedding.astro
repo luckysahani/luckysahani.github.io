@@ -68,9 +68,9 @@ const names =
 
     <article class="prose wed-body">
       <p class="wed-intro">
-        Two days of it, one venue, everyone in the same place. Below is
-        everything you need — when things start, where to be, and the handful
-        of practical details worth knowing before you set off.
+        Two days, one venue, and everyone we love in the same place. Here is
+        what is happening and when, how to find us, and a few practical things
+        worth knowing before you set off.
       </p>
 
       <div class="crest">
@@ -151,26 +151,22 @@ const names =
       </div>
 
       <section class="rsvp">
-        <p class="label">RSVP</p>
+        <p class="label">Letting us know</p>
         {rsvp.url ? (
           <>
-            <p>Let us know if you can make it, and for which nights.</p>
+            <p>
+              Please tell us whether you can come, how many of you there will
+              be, and which of the two nights you are staying.
+            </p>
             <p class="cta-row"><a class="btn btn-solid" href={rsvp.url}>Reply</a></p>
           </>
         ) : (
-          <p class="wed-muted">
-            The RSVP form goes here once it is set up — accept or decline, a
-            headcount, and which of the two nights you are staying.
+          <p>
+            Do let us know how many of you are coming and which of the two
+            nights you will stay — it helps us with rooms. The numbers to call
+            are on your invitation.
           </p>
         )}
-      </section>
-
-      <section class="gallery-note">
-        <p class="label">Photographs</p>
-        <p class="wed-muted">
-          More from the shoot will go here — a gallery sits naturally below
-          this line.
-        </p>
       </section>
     </article>
   </div>
