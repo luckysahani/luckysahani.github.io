@@ -1,5 +1,10 @@
 ---
 import { Image } from 'astro:assets';
+import roka from '../assets/wedding/gallery/00-roka.jpg';
+import tilak from '../assets/wedding/gallery/00b-tilak.jpg';
+import evening from '../assets/wedding/gallery/00c-evening.jpg';
+import onTheWay from '../assets/wedding/gallery/00d-on-the-way.jpg';
+import hawaMahal from '../assets/wedding/gallery/00e-hawa-mahal.jpg';
 import ask from '../assets/wedding/gallery/01-proposal-ask.jpg';
 import yes from '../assets/wedding/gallery/02-proposal-yes.jpg';
 import four from '../assets/wedding/gallery/03-kishangarh-four.jpg';
@@ -8,15 +13,22 @@ import colonnade from '../assets/wedding/gallery/05-patrika-colonnade.jpg';
 import gardens from '../assets/wedding/gallery/06-amer-gardens.jpg';
 import window_ from '../assets/wedding/gallery/07-amer-window.jpg';
 
-// The first two run in sequence, so they sit side by side and lead.
+// Chronological: the roka in January, then the year, then the Jaipur shoot
+// in September — ending on the proposal, which is where the story lands.
+// Captions only claim what is actually known about each frame.
 const shots = [
-  { src: ask,       alt: 'The proposal at the Kishangarh marble flats, ring held out at sunset', cap: 'Kishangarh, at sunset', wide: false },
-  { src: yes,       alt: 'The proposal a moment later, hand taken',                              cap: 'A moment later',        wide: false },
-  { src: four,      alt: 'The four of us on the marble flats at dusk',                           cap: 'The four of us',        wide: true  },
-  { src: steps,     alt: 'The two of us on the steps at Patrika Gate, Jaipur',                   cap: 'Patrika Gate',          wide: false },
-  { src: colonnade, alt: 'Kanchan in the painted colonnade at Patrika Gate',                     cap: 'Patrika Gate',          wide: false },
-  { src: gardens,   alt: 'Kanchan in the gardens below Amer Fort',                               cap: 'Amer Fort',             wide: false },
-  { src: window_,   alt: 'Kanchan at a latticed window inside Amer Fort',                        cap: 'Amer Fort',             wide: false },
+  { src: roka,       cap: 'The roka · Varanasi',  wide: true,  alt: 'The two of us at the roka, under a balloon arch' },
+  { src: tilak,      cap: 'Tilak',                wide: false, alt: 'A close portrait of the two of us with tilak marks' },
+  { src: evening,    cap: 'An evening out',       wide: false, alt: 'The two of us at a restaurant table, leaning on our hands' },
+  { src: onTheWay,   cap: 'On the way',           wide: false, alt: 'The two of us dressed up in the back of a car on a rainy day' },
+  { src: hawaMahal,  cap: 'Hawa Mahal, Jaipur',   wide: true,  alt: 'The two of us in white on a rooftop opposite Hawa Mahal at dusk' },
+  { src: steps,      cap: 'Patrika Gate',         wide: false, alt: 'The two of us on the steps at Patrika Gate, Jaipur' },
+  { src: colonnade,  cap: 'Patrika Gate',         wide: false, alt: 'Kanchan in the painted colonnade at Patrika Gate' },
+  { src: gardens,    cap: 'Amer Fort',            wide: false, alt: 'Kanchan in the gardens below Amer Fort' },
+  { src: window_,    cap: 'Amer Fort',            wide: false, alt: 'Kanchan at a latticed window inside Amer Fort' },
+  { src: four,       cap: 'The four of us',       wide: true,  alt: 'The four of us on the marble flats at dusk' },
+  { src: ask,        cap: 'Kishangarh, at sunset', wide: false, alt: 'The proposal at the Kishangarh marble flats, ring held out at sunset' },
+  { src: yes,        cap: 'A moment later',        wide: false, alt: 'The proposal a moment later, hand taken' },
 ];
 ---
 
@@ -41,8 +53,8 @@ const shots = [
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
     gap: 0.8rem;
-    /* The two-column item cannot fit beside the first pair, so without
-       dense packing it wraps and leaves a hole in the top-right. */
+    /* A two-column item cannot always fit where it falls, so without dense
+       packing it wraps and leaves holes in the grid. */
     grid-auto-flow: dense;
   }
   .gal-item { margin: 0; }
@@ -54,6 +66,7 @@ const shots = [
     height: auto;
     aspect-ratio: 3 / 4;
     object-fit: cover;
+    object-position: center;
     background: var(--surface-2, var(--rule-soft));
   }
   .gal-item--wide :global(img) { aspect-ratio: 3 / 2; }
