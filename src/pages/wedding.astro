@@ -3,6 +3,7 @@ import { Image, getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import hero from '../assets/wedding/hero.jpg';
 import Monogram from '../components/Monogram.astro';
+import Gallery from '../components/Gallery.astro';
 import { couple, headline, events, venue, faqs, rsvp } from '../data/wedding';
 
 // Group events by the day they fall on, preserving order.
@@ -142,6 +143,21 @@ const names =
             </div>
           ))}
         </dl>
+      </section>
+
+      <div class="crest">
+        <span class="crest-line"></span>
+        <Monogram size={30} />
+        <span class="crest-line"></span>
+      </div>
+
+      <section class="u-wide">
+        <p class="label">From the shoot</p>
+        <p class="gal-lede">
+          Jaipur in September — Patrika Gate and Amer Fort, then the marble
+          flats at Kishangarh, where he asked.
+        </p>
+        <Gallery />
       </section>
 
       <div class="crest">
@@ -494,13 +510,17 @@ const names =
     line-height: 1.6;
   }
 
+  .gal-lede {
+    color: var(--ink-soft);
+    max-width: 56ch;
+  }
+
   .wed-muted {
     color: var(--ink-faint);
     font-style: italic;
   }
 
-  .rsvp,
-  .gallery-note {
+  .rsvp {
     padding-top: 0.4rem;
   }
 
