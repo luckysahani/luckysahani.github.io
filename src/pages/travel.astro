@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import TripMap from '../components/TripMap.astro';
-import { trips, places, europe, wishlist } from '../data/travel';
+import { trips, places, wishlist } from '../data/travel';
 
 const ahead = trips.filter((t) => t.status === 'ahead');
 const past = trips.filter((t) => t.status === 'past');
@@ -20,15 +20,14 @@ const indexed = groups.map((g) => ({
 
 <Base
   title="Travel"
-  description="Where I have been and where I am going next — India, the Indian Ocean, and two weeks in Europe."
+  description="Where I have been and where I am going next — across India and the United States, with the Maldives and Sri Lanka ahead."
 >
   <article class="prose prose--notes travel">
     <p class="kicker">Travel</p>
     <h1>Where I have been, and where I am going next.</h1>
     <p class="dek">
-      Ten years of it happened around a job in another country. Most of what
-      follows is the year that changed that — coming home, getting married, and
-      the trips stacked either side.
+      India and the United States, mostly — ten years of one built around a job
+      in the other. Below is the record, and the two trips still ahead of it.
     </p>
 
     <TripMap places={places} />
@@ -51,22 +50,6 @@ const indexed = groups.map((g) => ({
           </li>
         ))}
       </ol>
-    </section>
-
-    <section class="europe u-wide">
-      <p class="label">{europe.title}</p>
-      <p class="sec-lede">{europe.lede}</p>
-      <ol class="legs">
-        {europe.legs.map((l) => (
-          <li>
-            <span class="leg-n tabular">{l.nights}</span>
-            <span class="leg-unit">nights</span>
-            <span class="leg-base">{l.base}</span>
-            <span class="leg-what">{l.what}</span>
-          </li>
-        ))}
-      </ol>
-      <p class="caveat">{europe.caveat}</p>
     </section>
 
     <hr class="rule-line" />
@@ -181,39 +164,6 @@ const indexed = groups.map((g) => ({
   .trip-what p { margin-top: 0.4rem; color: var(--ink-soft); font-size: 0.98rem; }
 
   .trip--ahead .trip-date { color: var(--accent); }
-
-  /* ---- europe ---- */
-
-  .europe { margin-top: 1.6rem; }
-
-  .legs { list-style: none; margin: 1.2rem 0 0; padding: 0; }
-  .legs li {
-    display: grid;
-    grid-template-columns: 2.4rem 3.4rem minmax(0, 11rem) 1fr;
-    gap: 0.9rem;
-    align-items: baseline;
-    padding: 0.7rem 0;
-    border-top: 1px solid var(--rule-soft);
-  }
-  .legs li:last-child { border-bottom: 1px solid var(--rule-soft); }
-  .leg-n { font-size: 1.25rem; color: var(--ink); text-align: right; }
-  .leg-unit {
-    font-family: var(--mono);
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-faint);
-  }
-  .leg-base { font-size: 1.05rem; color: var(--ink); }
-  .leg-what { font-size: 0.94rem; color: var(--ink-soft); }
-
-  .caveat {
-    margin-top: 1rem;
-    font-size: 0.95rem;
-    color: var(--ink-faint);
-    font-style: italic;
-    max-width: 56ch;
-  }
 
   /* ---- wishlist ---- */
 

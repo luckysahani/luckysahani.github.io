@@ -1,111 +1,207 @@
 ---
 import Base from '../layouts/Base.astro';
+import Monogram from '../components/Monogram.astro';
+import { places } from '../data/travel';
+import { stats as gameStats } from '../data/gaming';
+import { systems } from '../data/career';
+import { backlog, topTier, tiers } from '../data/anime';
+import { headline as wedding } from '../data/wedding';
+
+// Every figure below is derived from the same data the pages themselves
+// render, so the index can never drift out of step with them.
+const animeCount =
+  backlog.length + topTier.length +
+  tiers.reduce((n, t) => n + t.states.reduce((m, s) => m + s.titles.length, 0), 0);
 
 const sections = [
-  { href: '/career/',  label: 'Career',  note: 'Ten years of systems, and how they were built.' },
-  { href: '/wedding/', label: 'Wedding',  note: 'November 2026 — schedule, venue and travel.' },
-  { href: '/travel/',  label: 'Travel',   note: 'Where I have been, and where I am going next.' },
-  { href: '/gaming/',  label: 'Gaming',   note: 'A playtime record and an honest backlog.' },
-  { href: '/anime/',   label: 'Anime',    note: 'What I have watched and what is queued.' },
+  { href: '/career/',  label: 'Career',  stat: '10 yrs', unit: 'at Amazon',
+    line: `Ten years of platforms. ${systems.length} systems, drawn rather than described.` },
+  { href: '/travel/',  label: 'Travel',  stat: String(places.length), unit: 'places',
+    line: 'India and the United States, and what is still ahead.' },
+  { href: '/gaming/',  label: 'Gaming',  stat: gameStats.hours.toLocaleString(), unit: 'hours',
+    line: 'Thirteen years on Steam, and one game with most of it.' },
+  { href: '/anime/',   label: 'Anime',   stat: String(animeCount), unit: 'titles',
+    line: 'A backlog I have been curating longer than I have been watching.' },
+  { href: '/wedding/', label: 'Wedding', stat: '21 Nov', unit: '2026',
+    line: 'Everything the day needs — schedule, venue, and how to get there.' },
 ];
 ---
 
 <Base
   title="Lucky Sahani"
-  description="Senior software engineer. Ten years at Amazon building distributed systems, most recently as an SDE III. Based in Gurgaon."
+  description="Engineer in Gurgaon. Ten years at Amazon, most of them in Seattle. Lists of games, places and anime, and the work behind them."
   bare
 >
-  <article class="prose home">
-    <p class="kicker">Senior Software Engineer · Gurgaon</p>
+  <div class="home">
+    <section class="hero">
+      <p class="eyebrow">Gurgaon, India</p>
+      <h1 class="name">Lucky<br />Sahani</h1>
+      <div class="intro">
+        <p class="lede">
+          Engineer. Ten years at Amazon, most of them in Seattle — home again
+          now, and getting married in November.
+        </p>
+        <p>
+          I keep lists. Games I fully intend to get to, places I have been,
+          anime I am several seasons behind on. This site is mostly those
+          lists, and the work that paid for them.
+        </p>
+      </div>
+      <span class="hero-mark"><Monogram size={26} /></span>
+    </section>
 
-    <h1>I build and run large distributed systems.</h1>
-
-    <p class="dek">
-      Ten years at Amazon, Bengaluru to Seattle, most recently as a Senior SDE.
-      Now back in Gurgaon and looking for Senior or Staff engineering roles.
-    </p>
-
-    <hr class="rule-line" />
-
-    <p>
-      Most of my work has been platform engineering with real users on the other
-      end — seller-facing tools for Amazon's India marketplace, then internal
-      career-mobility products used by employees across fourteen countries and
-      forty-odd locales. What I keep coming back to is owning the whole
-      lifecycle: architecture, build, launch, and the pager afterwards.
-    </p>
-
-    <p>
-      I care about operational excellence more than most engineers I meet.
-      Continuous-deployment pipelines, alarms that actually page a human,
-      incident reviews written honestly, and technical debt quantified rather
-      than complained about.
-    </p>
-
-    <nav class="index u-wide" aria-label="Site sections">
-      <p class="label">Sections</p>
-      <ul>
-        {sections.map((s) => (
-          <li>
-            <a href={s.href}>
-              <span class="idx-label">{s.label}</span>
-              <span class="idx-note">{s.note}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
+    <nav class="index" aria-label="Sections">
+      {sections.map((s) => (
+        <a class="card" href={s.href}>
+          <span class="card-label">{s.label}</span>
+          <span class="card-stat tabular">
+            {s.stat}<span class="card-unit">{s.unit}</span>
+          </span>
+          <span class="card-line">{s.line}</span>
+          <span class="card-go" aria-hidden="true">→</span>
+        </a>
+      ))}
     </nav>
-  </article>
+  </div>
 </Base>
 
 <style>
   .home {
-    padding: clamp(3rem, 8vw, 6rem) 0 0;
+    max-width: 78rem;
+    margin: 0 auto;
+    padding: 0 1.5rem 2rem;
   }
+
+  /* ---- hero ---- */
+
+  .hero {
+    position: relative;
+    padding: clamp(3rem, 11vw, 7rem) 0 clamp(2.5rem, 6vw, 4rem);
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 5vw, 4rem);
+    align-items: end;
+  }
+
+  .eyebrow {
+    grid-column: 1 / -1;
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: clamp(1rem, 3vw, 2rem);
+  }
+
+  .name {
+    font-size: clamp(3.4rem, 13vw, 9.5rem);
+    line-height: 0.86;
+    font-weight: 300;
+    letter-spacing: -0.045em;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  .intro { padding-bottom: 0.6rem; }
+  .lede {
+    font-size: var(--step-1);
+    line-height: 1.4;
+    color: var(--ink);
+    font-weight: 300;
+  }
+  .intro p + p {
+    margin-top: 0.9rem;
+    color: var(--ink-soft);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .hero-mark {
+    position: absolute;
+    top: clamp(2.6rem, 10vw, 6.4rem);
+    right: 0;
+    line-height: 0;
+    color: var(--rule);
+  }
+
+  /* ---- index ---- */
 
   .index {
-    margin-top: 2.4rem;
-    border-top: 1px solid var(--rule);
-    padding-top: 1.4rem;
-  }
-
-  .index ul {
-    list-style: none;
-    margin: 0.9rem 0 0;
-    padding: 0;
-  }
-
-  .index li + li {
-    border-top: 1px solid var(--rule-soft);
-  }
-
-  .index a {
     display: grid;
-    grid-template-columns: minmax(0, 9rem) 1fr;
-    gap: 1.5rem;
-    align-items: baseline;
-    padding: 0.85rem 0;
-    text-decoration: none;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    border-top: 1px solid var(--ink);
   }
 
-  .idx-label {
-    font-family: var(--serif);
-    font-size: var(--step-1);
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.6rem 1.4rem 1.5rem 0;
+    border-bottom: 1px solid var(--rule);
+    text-decoration: none;
+    position: relative;
+    transition: background-color 0.18s ease;
+  }
+  .card + .card { border-left: 1px solid var(--rule); padding-left: 1.4rem; }
+  .card:hover { background: var(--accent-soft); }
+
+  .card-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .card-stat {
+    font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+    line-height: 1;
     font-weight: 300;
     color: var(--ink);
-    letter-spacing: -0.015em;
+    letter-spacing: -0.025em;
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    flex-wrap: wrap;
   }
-
-  .idx-note {
-    font-size: var(--step--1);
+  .card-unit {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     color: var(--ink-faint);
-    line-height: 1.5;
   }
 
-  .index a:hover .idx-label { color: var(--accent); }
-  .index a:hover .idx-note  { color: var(--ink-soft); }
+  .card-line {
+    font-size: 0.94rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 26ch;
+  }
 
-  @media (max-width: 620px) {
-    .index a { grid-template-columns: 1fr; gap: 0.25rem; }
+  .card-go {
+    font-family: var(--mono);
+    font-size: 0.9rem;
+    color: var(--accent);
+    margin-top: auto;
+    padding-top: 0.8rem;
+    transform: translateX(0);
+    transition: transform 0.18s ease;
+  }
+  .card:hover .card-go { transform: translateX(4px); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card, .card-go { transition: none; }
+    .card:hover .card-go { transform: none; }
+  }
+
+  @media (max-width: 780px) {
+    .hero {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 1.6rem;
+    }
+    .hero-mark { display: none; }
+    .card + .card { border-left: none; padding-left: 0; }
   }
 </style>

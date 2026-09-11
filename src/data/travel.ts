@@ -129,40 +129,6 @@ export const trips: Trip[] = [
       'Ten days with eight of us. This one replaced an Andaman plan — the islands ' +
       'are still on the list below.',
   },
-  {
-    slug: 'switzerland',
-    place: 'Lucerne & Interlaken',
-    region: 'Switzerland',
-    when: 'May–June 2027',
-    year: '2027',
-    status: 'ahead',
-    coords: [7.8632, 46.6863],
-    note:
-      'The first leg of two weeks in Europe. Jungfraujoch, Mürren, and a lake ' +
-      'cruise out of Lucerne.',
-  },
-  {
-    slug: 'paris',
-    place: 'Paris',
-    region: 'France',
-    when: 'June 2027',
-    year: '2027',
-    status: 'ahead',
-    coords: [2.3522, 48.8566],
-    note: 'Five nights, with a birthday dinner somewhere in the middle of them.',
-  },
-  {
-    slug: 'provence',
-    place: 'Nice & Provence',
-    region: 'France',
-    when: 'June 2027',
-    year: '2027',
-    status: 'ahead',
-    coords: [7.262, 43.7102],
-    note:
-      'The flexible end of the trip — Èze, Monaco, the Gorges du Verdon. Or more ' +
-      'Switzerland, if we lose our nerve about the driving.',
-  },
 ];
 
 export interface Place {
@@ -229,28 +195,7 @@ export const places: Place[] = [
   { name: 'Vaishno Devi', where: 'Jammu & Kashmir', when: 'Oct 2026', coords: [74.9319, 32.9917], status: 'ahead' },
   { name: 'Maldives', where: 'Indian Ocean', when: 'Nov 2026', coords: [73.5093, 4.1755], status: 'ahead' },
   { name: 'Sri Lanka', where: 'Colombo', when: 'Dec 2026', coords: [79.8612, 6.9271], status: 'ahead' },
-  { name: 'Lucerne', where: 'Switzerland', when: 'May 2027', coords: [8.3093, 47.0502], status: 'ahead' },
-  { name: 'Interlaken', where: 'Switzerland', when: 'Jun 2027', coords: [7.8632, 46.6863], status: 'ahead' },
-  { name: 'Paris', where: 'France', when: 'Jun 2027', coords: [2.3522, 48.8566], status: 'ahead' },
-  { name: 'Nice', where: 'France', when: 'Jun 2027', coords: [7.262, 43.7102], status: 'ahead' },
 ];
-
-export const europe = {
-  title: 'Two weeks in Europe, 2027',
-  lede:
-    'Four of us, fifteen nights, leaving at the end of May. Three routes were on ' +
-    'the table; the one we are leaning towards trades Italy away to get both Paris ' +
-    'and Switzerland properly rather than all three in a hurry.',
-  legs: [
-    { nights: '2', base: 'Lucerne', what: 'Chapel Bridge, Rigi, a lake cruise' },
-    { nights: '3', base: 'Interlaken', what: 'Jungfraujoch, Mürren, Grindelwald' },
-    { nights: '5', base: 'Paris', what: 'The Eiffel summit, a dinner on the Seine' },
-    { nights: '5', base: 'Nice & Provence', what: 'Èze, Monaco, the Gorges du Verdon' },
-  ],
-  caveat:
-    'Four bases in fifteen nights, which is the whole point — a group of four moves ' +
-    'slowly, and every change of base costs half a day.',
-};
 
 export interface WishGroup {
   title: string;
