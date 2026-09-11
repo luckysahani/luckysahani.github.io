@@ -4,14 +4,12 @@ import Monogram from '../components/Monogram.astro';
 import { places } from '../data/travel';
 import { stats as gameStats } from '../data/gaming';
 import { systems } from '../data/career';
-import { backlog, topTier, tiers } from '../data/anime';
+import { chinese, japanese } from '../data/anime';
 import { headline as wedding } from '../data/wedding';
 
 // Every figure below is derived from the same data the pages themselves
 // render, so the index can never drift out of step with them.
-const animeCount =
-  backlog.length + topTier.length +
-  tiers.reduce((n, t) => n + t.states.reduce((m, s) => m + s.titles.length, 0), 0);
+const animeCount = chinese.length + japanese.length;
 
 const sections = [
   { href: '/career/',  label: 'Career',  stat: '10 yrs', unit: 'at Amazon',
@@ -20,8 +18,8 @@ const sections = [
     line: 'India and the United States, and what is still ahead.' },
   { href: '/gaming/',  label: 'Gaming',  stat: gameStats.hours.toLocaleString(), unit: 'hours',
     line: 'Thirteen years on Steam, and one game with most of it.' },
-  { href: '/anime/',   label: 'Anime',   stat: String(animeCount), unit: 'titles',
-    line: 'A backlog I have been curating longer than I have been watching.' },
+  { href: '/anime/',   label: 'Anime',   stat: String(animeCount), unit: 'ranked',
+    line: 'Chinese and Japanese, ten of each, ordered by world rating.' },
   { href: '/wedding/', label: 'Wedding', stat: '21 Nov', unit: '2026',
     line: 'Everything the day needs — schedule, venue, and how to get there.' },
 ];
