@@ -545,9 +545,15 @@ const names =
     /* Generous, but the names still have to clear the fold on a phone.
        A fixed height rather than aspect-ratio — the latter derives width
        from the capped height and leaves the container short of full bleed. */
+    /* Stacked here, so the photo shares the text's margin instead of keeping
+       the desktop treatment — that one is inset on the left only because its
+       right edge meets the text column, which does not exist at this width,
+       leaving the photo hanging off the screen edge. */
     .hero-media {
       width: 100%;
       height: var(--hero-mobile-h);
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
     }
     /* Matched to the box outright. The desktop 90% cap would overshoot it, and
        neither height:100% nor align-self:stretch brings an image down to a
