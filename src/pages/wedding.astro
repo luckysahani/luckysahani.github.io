@@ -243,21 +243,34 @@ const names =
   /* ---- hero ---- */
 
   .hero {
+    /* Tall enough that the photo, inset by the same margin as the text
+       opposite, still reads at about 70% of its column rather than shrinking
+       to fit a short row. */
+    --hero-h: min(92vh, 880px);
+    --hero-pad: clamp(2rem, 5vw, 4.5rem);
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     align-items: stretch;
-    min-height: min(84vh, 760px);
+    min-height: var(--hero-h);
   }
 
+  /* The photo is inset on the same rhythm as the text opposite, so both
+     halves hold off the screen edge by the same amount and the frame reads
+     as an object on the page rather than a panel bleeding off it. Shown
+     whole rather than cropped to fill — the padding is what sizes it. */
   .hero-media {
-    overflow: hidden;
-    background: var(--surface-2, var(--rule-soft));
+    display: grid;
+    place-items: center;
+    padding: var(--hero-pad);
   }
+  /* Bounded against the hero's own height rather than 100%: a percentage
+     height here resolves against a row that is itself sized by this image,
+     which is circular, and the browser drops the cap entirely. */
   .hero-media :global(img) {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 28%;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: calc(var(--hero-h) - 2 * var(--hero-pad));
     display: block;
   }
 
@@ -537,7 +550,12 @@ const names =
        from the capped height and leaves the container short of full bleed. */
     .hero-media {
       width: 100%;
-      height: 46vh;
+      padding: 1.5rem 1.5rem 0;
+    }
+    .hero-media :global(img) {
+      max-height: 58vh;
+      width: auto;
+      margin-inline: auto;
     }
     .hero-text {
       padding: 2rem 1.5rem 2.5rem;
