@@ -16,17 +16,21 @@ import window_ from '../assets/wedding/gallery/07-amer-window.jpg';
 // Chronological: the roka in January, then the year, then the Jaipur shoot
 // in September — ending on the proposal, which is where the story lands.
 // Captions only claim what is actually known about each frame.
+//
+// `wide` spans two columns and centre-crops to 3:2, so it suits only frames
+// whose subjects sit in the middle band — a full-length group shot loses its
+// heads and feet to it and must stay a 3:4 tile.
 const shots = [
   { src: roka,       cap: 'The roka · Varanasi',  wide: true,  alt: 'The two of us at the roka, under a balloon arch' },
   { src: tilak,      cap: 'Tilak',                wide: false, alt: 'A close portrait of the two of us with tilak marks' },
-  { src: evening,    cap: 'An evening out',       wide: false, alt: 'The two of us at a restaurant table, leaning on our hands' },
+  { src: evening,    cap: 'An evening out',       wide: true,  alt: 'The two of us at a restaurant table, leaning on our hands' },
   { src: onTheWay,   cap: 'On the way',           wide: false, alt: 'The two of us dressed up in the back of a car on a rainy day' },
   { src: hawaMahal,  cap: 'Hawa Mahal, Jaipur',   wide: true,  alt: 'The two of us in white on a rooftop opposite Hawa Mahal at dusk' },
   { src: steps,      cap: 'Patrika Gate',         wide: false, alt: 'The two of us on the steps at Patrika Gate, Jaipur' },
   { src: colonnade,  cap: 'Patrika Gate',         wide: false, alt: 'Kanchan in the painted colonnade at Patrika Gate' },
   { src: gardens,    cap: 'Amer Fort',            wide: false, alt: 'Kanchan in the gardens below Amer Fort' },
   { src: window_,    cap: 'Amer Fort',            wide: false, alt: 'Kanchan at a latticed window inside Amer Fort' },
-  { src: four,       cap: 'The four of us',       wide: true,  alt: 'The four of us on the marble flats at dusk' },
+  { src: four,       cap: 'The four of us',       wide: false, alt: 'The four of us on the marble flats at dusk' },
   { src: ask,        cap: 'Kishangarh, at sunset', wide: false, alt: 'The proposal at the Kishangarh marble flats, ring held out at sunset' },
   { src: yes,        cap: 'A moment later',        wide: false, alt: 'The proposal a moment later, hand taken' },
 ];
