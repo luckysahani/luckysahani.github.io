@@ -243,34 +243,30 @@ const names =
   /* ---- hero ---- */
 
   .hero {
-    /* Tall enough that the photo, inset by the same margin as the text
-       opposite, still reads at about 70% of its column rather than shrinking
-       to fit a short row. */
-    --hero-h: min(92vh, 880px);
-    --hero-pad: clamp(2rem, 5vw, 4.5rem);
+    --hero-h: min(84vh, 760px);
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     align-items: stretch;
     min-height: var(--hero-h);
   }
 
-  /* The photo is inset on the same rhythm as the text opposite, so both
-     halves hold off the screen edge by the same amount and the frame reads
-     as an object on the page rather than a panel bleeding off it. Shown
-     whole rather than cropped to fill — the padding is what sizes it. */
+  /* Full-bleed as before, but held a little off the left edge and stood down
+     to 90% so the frame reads as a picture rather than the page wall. No
+     panel colour behind it — the gaps should show the page, not a grey box. */
   .hero-media {
+    overflow: hidden;
     display: grid;
-    place-items: center;
-    padding: var(--hero-pad);
+    align-items: center;
+    padding-left: clamp(0.75rem, 1.5vw, 1.25rem);
   }
-  /* Bounded against the hero's own height rather than 100%: a percentage
-     height here resolves against a row that is itself sized by this image,
-     which is circular, and the browser drops the cap entirely. */
+  /* 90% of the hero's own height, not of the row: a percentage height here
+     resolves against a row this image is itself sizing, and the pair settle
+     at the image's full natural height instead of shrinking. */
   .hero-media :global(img) {
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: calc(var(--hero-h) - 2 * var(--hero-pad));
+    width: 100%;
+    height: calc(var(--hero-h) * 0.9);
+    object-fit: cover;
+    object-position: center 28%;
     display: block;
   }
 
@@ -542,6 +538,7 @@ const names =
 
   @media (max-width: 900px) {
     .hero {
+      --hero-mobile-h: 46vh;
       grid-template-columns: 1fr;
       min-height: 0;
     }
@@ -550,12 +547,14 @@ const names =
        from the capped height and leaves the container short of full bleed. */
     .hero-media {
       width: 100%;
-      padding: 1.5rem 1.5rem 0;
+      height: var(--hero-mobile-h);
     }
+    /* Matched to the box outright. The desktop 90% cap would overshoot it, and
+       neither height:100% nor align-self:stretch brings an image down to a
+       grid area — a percentage there resolves as auto, and stretch does not
+       apply to a replaced element that has an intrinsic ratio. */
     .hero-media :global(img) {
-      max-height: 58vh;
-      width: auto;
-      margin-inline: auto;
+      height: var(--hero-mobile-h);
     }
     .hero-text {
       padding: 2rem 1.5rem 2.5rem;
