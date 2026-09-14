@@ -16,7 +16,20 @@ interface Props {
 }
 
 const { title, description, bare = false, noindex = false, ogImage } = Astro.props;
-const ogImageUrl = ogImage ? new URL(ogImage, Astro.site).href : undefined;
+
+// Link-preview cards, rendered from the page's own headline and kept in
+// public/og. Mapped rather than derived from the path so that a new page
+// without a card simply goes without one, instead of pointing a crawler at
+// an image that isn't there.
+const OG_CARDS: Record<string, string> = {
+  '/': '/og/home.jpg',
+  '/career/': '/og/career.jpg',
+  '/travel/': '/og/travel.jpg',
+  '/gaming/': '/og/gaming.jpg',
+  '/anime/': '/og/anime.jpg',
+};
+const card = ogImage ?? OG_CARDS[Astro.url.pathname];
+const ogImageUrl = card ? new URL(card, Astro.site).href : undefined;
 const fullTitle = bare ? title : `${title} · Lucky Sahani`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---

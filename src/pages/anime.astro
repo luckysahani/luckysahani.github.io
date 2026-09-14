@@ -7,9 +7,12 @@ const sections = [
     lede: 'Cultivation epics, mostly, and long runs — often hundreds of episodes. The rating pools here are much smaller than on the Japanese side.' },
   { key: 'jp', title: 'Japanese', sub: 'Anime', rows: japanese,
     lede: 'The canon, more or less. Nothing here is rated by fewer than a few hundred thousand people.' },
-];
-
-const maxRaters = Math.max(...[...chinese, ...japanese].map((r) => r.raters));
+// Each table is scaled against its own busiest title. A shared axis would be
+// the honest-looking choice but is the useless one: the largest Japanese pool
+// is sixteen times the largest Chinese one, so every Chinese bar collapsed to
+// the same stub and 676 ratings looked identical to 6,000. The bar compares
+// within a tradition; the count beside it carries the absolute figure.
+].map((s) => ({ ...s, maxRaters: Math.max(...s.rows.map((r) => r.raters)) }));
 ---
 
 <Base
@@ -41,8 +44,11 @@ const maxRaters = Math.max(...[...chinese, ...japanese].map((r) => r.raters));
                 <span class="rk-year tabular">{r.year}</span>
                 <span class="rk-score tabular">{r.score.toFixed(2)}</span>
                 <span class="rk-votes">
-                  <span class="rk-votebar">
-                    <span class="rk-votefill" style={`width:${Math.max(2, (r.raters / maxRaters) * 100)}%`}></span>
+                  <span
+                    class="rk-votebar"
+                    title={`${r.raters.toLocaleString()} ratings — most-rated ${s.title} title here has ${s.maxRaters.toLocaleString()}`}
+                  >
+                    <span class="rk-votefill" style={`width:${Math.max(1.5, (r.raters / s.maxRaters) * 100)}%`}></span>
                   </span>
                   <span class="rk-voten tabular">
                     {r.raters >= 1000 ? `${Math.round(r.raters / 1000)}k` : r.raters}
