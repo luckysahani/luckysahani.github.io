@@ -325,6 +325,14 @@ p + p { margin-top: 0.75em; }
   min-width: 0;
   height: 100%;
 }
+/* At preview size the page map's pale land all but disappears, worst on the
+   dark ground, so the compact map draws it from the ink at low strength —
+   which lifts it in dark mode without darkening it much in light. */
+.tmap-svg--mini .tmap-land {
+  fill: var(--ink-faint);
+  fill-opacity: 0.32;
+  stroke: none;
+}
 
 .tmap-land {
   fill: var(--rule-soft);
