@@ -1,4 +1,6 @@
 ---
+import { contact } from '../data/contact';
+
 const year = new Date().getFullYear();
 ---
 
@@ -6,9 +8,7 @@ const year = new Date().getFullYear();
   <div class="foot-inner">
     <p class="label">Gurgaon, India</p>
     <p class="links">
-      <a href="mailto:luckythegreat4@gmail.com">Email</a>
-      <a href="https://www.linkedin.com/in/luckysahani" rel="me noopener">LinkedIn</a>
-      <a href="https://github.com/luckysahani" rel="me noopener">GitHub</a>
+      {contact.map((c) => <a href={c.href} rel={c.rel}>{c.label}</a>)}
     </p>
     <p class="label">&copy; {year}</p>
   </div>

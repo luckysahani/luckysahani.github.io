@@ -321,6 +321,11 @@ p + p { margin-top: 0.75em; }
   min-width: 560px;
 }
 
+.tmap-svg--mini {
+  min-width: 0;
+  height: 100%;
+}
+
 .tmap-land {
   fill: var(--rule-soft);
   stroke: var(--rule);
