@@ -107,7 +107,7 @@ export const venue = {
   mapsUrl: 'https://maps.app.goo.gl/jzLtpnSUDssejTiPA',
   fromAirport: '20 km from Delhi airport (IGI), straight down NH-8',
   grounds: 'Nine acres of lawns and gardens, set back from the highway',
-  checkIn: '1:00 pm',
+  checkIn: '12:00 pm',
   checkOut: '10:30 am',
 };
 
@@ -151,7 +151,7 @@ export const faqs: Faq[] = [
   },
   {
     q: 'What are check-in and check-out?',
-    a: 'Rooms open at 1:00 pm and check-out is 10:30 am.',
+    a: `Rooms open at ${venue.checkIn} and check-out is ${venue.checkOut}.`,
   },
 ];
 
