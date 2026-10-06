@@ -6,7 +6,7 @@ import CareerProfilePlatform from '../components/diagrams/CareerProfilePlatform.
 import ConfigSync from '../components/diagrams/ConfigSync.astro';
 import BounceMonitoring from '../components/diagrams/BounceMonitoring.astro';
 import {
-  thesis, metrics, systems, arc, designs, alsoBuilt, ops, stack, people, ask,
+  thesis, metrics, systems, arc, before, designs, alsoBuilt, ops, stack, people, ask,
 } from '../data/career';
 
 const diagrams = [NotificationPlatform, CareerProfilePlatform, ConfigSync, BounceMonitoring];
@@ -85,6 +85,17 @@ const diagrams = [NotificationPlatform, CareerProfilePlatform, ConfigSync, Bounc
           </li>
         ))}
       </ol>
+    </section>
+
+    <hr class="rule-line" />
+
+    <section>
+      <p class="label">Before Amazon</p>
+      <p class="before-edu">{before.education}</p>
+      <ul class="plain">
+        {before.items.map((b) => <li>{b}</li>)}
+      </ul>
+      <p class="before-more"><a href={before.link.href}>{before.link.label} →</a></p>
     </section>
 
     <hr class="rule-line" />
@@ -244,6 +255,9 @@ const diagrams = [NotificationPlatform, CareerProfilePlatform, ConfigSync, Bounc
     color: var(--ink-soft);
   }
   .plain li { padding-left: 0.2rem; font-size: 0.96rem; }
+
+  .before-edu { margin: 0.9rem 0 0; font-size: 1.04rem; color: var(--ink); }
+  .before-more { margin: 0.9rem 0 0; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; }
 
   /* ---- stack ---- */
   .stack { margin: 1.1rem 0 0; }

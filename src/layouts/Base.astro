@@ -27,6 +27,7 @@ const OG_CARDS: Record<string, string> = {
   '/travel/': '/og/travel.jpg',
   '/gaming/': '/og/gaming.jpg',
   '/anime/': '/og/anime.jpg',
+  '/projects/': '/og/projects.jpg',
 };
 const card = ogImage ?? OG_CARDS[Astro.url.pathname];
 const ogImageUrl = card ? new URL(card, Astro.site).href : undefined;

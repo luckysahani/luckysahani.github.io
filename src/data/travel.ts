@@ -67,8 +67,10 @@ export const trips: Trip[] = [
     status: 'past',
     coords: [-96.797, 32.7767],
     note:
-      'Went for the football. Messi and Ronaldo on the same pitch at a World Cup ' +
-      'held in your adopted country is not a fixture you talk yourself out of.',
+      'Went for the World Cup: Argentina–Austria in Arlington on the 22nd, then ' +
+      'Portugal–Uzbekistan in Houston the next day. Messi and Ronaldo on consecutive ' +
+      'days, at a World Cup held in your adopted country, is not a fixture you talk ' +
+      'yourself out of.',
   },
   {
     slug: 'patna',
@@ -141,8 +143,8 @@ export interface Place {
 
 /**
  * The wider record. Places from Dec 2024 onward are corroborated by a
- * Google Timeline export; earlier ones are from memory, so their dates are
- * deliberately vague. City-level only — no addresses, no timestamps.
+ * Google Timeline export or dated by Lucky; earlier ones are from memory, so
+ * their dates are deliberately vague unless he gave a year. City-level only — no addresses, no timestamps.
  */
 export const places: Place[] = [
   // Bases
@@ -152,14 +154,17 @@ export const places: Place[] = [
 
   // United States
   { name: 'Alaska', where: 'Palmer & Delta Junction', when: 'Earlier', coords: [-149.9003, 61.2181], status: 'past' },
+  { name: 'Maui', where: 'Hawaii', when: '2025', coords: [-156.3319, 20.7984], status: 'past' },
+  { name: 'Zion & Bryce Canyon', where: 'Utah', when: 'Aug 2024', coords: [-112.636, 37.38], status: 'past' },
+  { name: 'The Gorge Amphitheatre', where: 'Washington', when: '2023', coords: [-119.9958, 47.1035], status: 'past' },
   { name: 'New York', where: 'New York', when: 'Dec 2024', coords: [-73.9857, 40.7484], status: 'past' },
-  { name: 'Las Vegas', where: 'Nevada', when: 'Jan 2025', coords: [-115.1398, 36.1699], status: 'past' },
-  { name: 'Portland', where: 'Oregon', when: 'Aug 2025', coords: [-122.6784, 45.5152], status: 'past' },
+  { name: 'Las Vegas', where: 'Nevada', when: 'Aug 2024 · Jan 2025', coords: [-115.1398, 36.1699], status: 'past' },
+  { name: 'Portland & Mount Hood', where: 'Oregon', when: 'Aug 2025', coords: [-122.6784, 45.5152], status: 'past' },
   { name: 'Dallas', where: 'Texas', when: 'Jun 2026', coords: [-96.797, 32.7767], status: 'past' },
   { name: 'Houston', where: 'Texas', when: 'Jun 2026', coords: [-95.3698, 29.7604], status: 'past' },
   { name: 'San Francisco', where: 'California', when: 'Earlier', coords: [-122.4194, 37.7749], status: 'past' },
-  { name: 'Los Angeles', where: 'California', when: 'Earlier', coords: [-118.2437, 34.0522], status: 'past' },
-  { name: 'San Diego', where: 'California', when: 'Earlier', coords: [-117.1611, 32.7157], status: 'past' },
+  { name: 'Los Angeles', where: 'California', when: '2025', coords: [-118.2437, 34.0522], status: 'past' },
+  { name: 'San Diego', where: 'California', when: '2025', coords: [-117.1611, 32.7157], status: 'past' },
   { name: 'Denver', where: 'Colorado', when: 'Earlier', coords: [-104.9903, 39.7392], status: 'past' },
   { name: 'Orlando', where: 'Florida', when: 'Earlier', coords: [-81.3792, 28.5383], status: 'past' },
   { name: 'New Orleans', where: 'Louisiana', when: 'Earlier', coords: [-90.0715, 29.9511], status: 'past' },
@@ -170,6 +175,9 @@ export const places: Place[] = [
   { name: 'Jaipur', where: 'Rajasthan', when: 'Sep 2026', coords: [75.7873, 26.9124], status: 'past' },
   { name: 'Jodhpur', where: 'Rajasthan', when: 'Feb 2025', coords: [73.0243, 26.2389], status: 'past' },
   { name: 'Chandigarh', where: 'Punjab', when: 'Mar 2025', coords: [76.7794, 30.7333], status: 'past' },
+  { name: 'Kashmir', where: 'Jammu & Kashmir', when: '2021', coords: [74.7973, 34.0837], status: 'past' },
+  { name: 'Jim Corbett', where: 'Uttarakhand', when: '2024', coords: [78.7747, 29.53], status: 'past' },
+  { name: 'Kasol', where: 'Himachal Pradesh', when: 'Earlier', coords: [77.315, 32.01], status: 'past' },
   { name: 'Triund & Kheerganga', where: 'Himachal Pradesh', when: 'Earlier', coords: [76.3234, 32.2432], status: 'past' },
   { name: 'Bir Billing', where: 'Himachal Pradesh', when: 'Earlier', coords: [76.7218, 32.0415], status: 'past' },
   { name: 'Sikkim', where: 'North East', when: 'Earlier', coords: [88.6065, 27.533], status: 'past' },
@@ -178,9 +186,11 @@ export const places: Place[] = [
   // India — south & west
   { name: 'Alleppey', where: 'Kerala', when: 'Jan 2026', coords: [76.3388, 9.4981], status: 'past' },
   { name: 'Varkala & Paravur', where: 'Kerala', when: 'Jan 2026', coords: [76.7166, 8.7379], status: 'past' },
+  { name: 'Kuttikanam', where: 'Kerala', when: 'Jan 2026', coords: [76.977, 9.586], status: 'past' },
   { name: 'Munnar', where: 'Kerala', when: 'Earlier', coords: [77.0595, 10.0889], status: 'past' },
   { name: 'Wayanad', where: 'Kerala', when: 'Earlier', coords: [76.132, 11.6854], status: 'past' },
   { name: 'Ooty', where: 'Tamil Nadu', when: 'Earlier', coords: [76.695, 11.4064], status: 'past' },
+  { name: 'Kodaikanal', where: 'Tamil Nadu', when: 'Earlier', coords: [77.4892, 10.2381], status: 'past' },
   { name: 'Coorg', where: 'Karnataka', when: 'Earlier', coords: [75.7382, 12.3375], status: 'past' },
   { name: 'Goa', where: 'Goa', when: 'Earlier', coords: [73.8278, 15.2993], status: 'past' },
 
@@ -189,6 +199,7 @@ export const places: Place[] = [
   { name: 'Kanpur', where: 'Uttar Pradesh', when: '2012–2016', coords: [80.3319, 26.4499], status: 'past' },
   { name: 'Indore', where: 'Madhya Pradesh', when: 'Earlier', coords: [75.8577, 22.7196], status: 'past' },
   { name: 'Chennai', where: 'Tamil Nadu', when: 'Earlier', coords: [80.2707, 13.0827], status: 'past' },
+  { name: 'Puducherry', where: 'Puducherry', when: 'Earlier', coords: [79.8083, 11.9416], status: 'past' },
   { name: 'Yercaud', where: 'Tamil Nadu', when: 'Earlier', coords: [78.2097, 11.775], status: 'past' },
 
   // Ahead
@@ -207,8 +218,6 @@ export const wishlist: WishGroup[] = [
     title: 'Hills',
     items: [
       { place: 'Darjeeling & Gangtok', season: 'Mar–May, Oct–Nov', note: 'Toy train, Tsomgo Lake' },
-      { place: 'Munnar', season: 'Sep–Mar', note: 'Tea estates, mist' },
-      { place: 'Coorg', season: 'Oct–Mar', note: 'Coffee estates' },
       { place: 'Tawang', season: 'Apr–Oct', note: 'Offbeat, monasteries' },
       { place: 'Uttarakhand circuit', season: 'Oct–Jun', note: 'Haridwar to Mussoorie, by road' },
     ],
@@ -227,7 +236,6 @@ export const wishlist: WishGroup[] = [
     items: [
       { place: 'Udaipur', season: 'Oct–Mar', note: 'City of lakes' },
       { place: 'Jaisalmer', season: 'Oct–Mar', note: 'Forts, desert camp' },
-      { place: 'Varanasi', season: 'Oct–Mar', note: 'The Ganga aarti' },
       { place: 'Hampi', season: 'Oct–Feb', note: 'Ruins among boulders' },
       { place: 'Khajuraho & Orchha', season: 'Oct–Mar', note: 'Temples, riverside' },
     ],

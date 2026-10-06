@@ -1,0 +1,89 @@
+---
+import Base from '../layouts/Base.astro';
+import { intro, projects, coursework } from '../data/projects';
+
+const gh = (repo: string) => `https://github.com/luckysahani/${repo}`;
+---
+
+<Base
+  title="Projects"
+  description="IIT Kanpur, 2012–2016 — number plates on the campus cameras, skyline queries on MapReduce, a Java-to-MIPS compiler, 3-D Tetris, and a startup."
+>
+  <article class="prose projects">
+    <p class="kicker">{intro.kicker}</p>
+    <h1>{intro.headline}</h1>
+    <p class="dek">{intro.dek}</p>
+
+    <hr class="rule-line" />
+
+    <section class="u-wide">
+      <ol class="proj">
+        {projects.map((p) => (
+          <li>
+            <div class="proj-when">
+              <span class="proj-date tabular">{p.when}</span>
+              <span class="proj-area">{p.area}</span>
+            </div>
+            <div class="proj-what">
+              <h2>{p.title}</h2>
+              <p>{p.body}</p>
+              {p.repos && (
+                <p class="proj-repos">
+                  {p.repos.map((r) => <a href={gh(r)} rel="noopener">{r}</a>)}
+                </p>
+              )}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section>
+      <p class="coursework">
+        {coursework} <a href="https://github.com/luckysahani?tab=repositories" rel="me noopener">All repositories →</a>
+      </p>
+      <p class="back"><a href="/career/">← Career</a></p>
+    </section>
+  </article>
+</Base>
+
+<style>
+  .projects { padding: clamp(3rem, 8vw, 5.5rem) 0 4rem; }
+
+  .proj { list-style: none; margin: 1.4rem 0 0; padding: 0; }
+  .proj > li {
+    display: grid;
+    grid-template-columns: 11rem minmax(0, 1fr);
+    column-gap: 2rem;
+    padding: 1.3rem 0;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .proj > li:last-child { border-bottom: 1px solid var(--rule-soft); }
+  .proj-when { display: flex; flex-direction: column; gap: 0.3rem; padding-top: 0.25rem; }
+  .proj-date {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+  }
+  .proj-area {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .proj-what h2 { margin: 0; font-size: 1.22rem; line-height: 1.3; }
+  .proj-what p { margin: 0.45rem 0 0; color: var(--ink-soft); max-width: 62ch; }
+  .proj-repos { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; }
+  .proj-repos a { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.04em; }
+
+  .coursework { margin: 1.6rem 0 0; color: var(--ink-soft); font-size: 0.96rem; }
+  .coursework a, .back a { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; white-space: nowrap; }
+  .back { margin: 1.2rem 0 0; }
+
+  @media (max-width: 640px) {
+    .proj > li { grid-template-columns: 1fr; row-gap: 0.5rem; }
+    .proj-when { flex-direction: row; flex-wrap: wrap; gap: 0.2rem 0.8rem; align-items: baseline; padding-top: 0; }
+  }
+</style>

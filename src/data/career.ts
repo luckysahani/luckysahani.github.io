@@ -17,7 +17,7 @@ export const thesis = {
   kicker: 'Senior Software Engineer · Gurgaon',
   headline: 'Ten years of platforms with real users on the other end.',
   dek:
-    'Amazon, 2016 to 2026. Bengaluru first — seller tools for the India ' +
+    'Amazon, 2016 to 2026, after an internship there in 2015. Bengaluru first — seller tools for the India ' +
     'marketplace — then Seattle, building internal career-mobility products ' +
     'that ran in fourteen countries. Finished as a Senior SDE.',
 };
@@ -31,7 +31,7 @@ export const metrics: Metric[] = [
   { value: '32 → 2 min', label: 'UI test time', detail: 'A 94% cut, across eight languages.' },
   { value: '~800ms', label: 'latency removed', detail: 'A GST compliance check, by caching instead of seven service calls.' },
   { value: '99%+', label: 'line coverage', detail: 'The notification platform, with 100% branch coverage.' },
-  { value: '12', label: 'countries launched', detail: 'One EMEA expansion, four phased launches, on schedule.' },
+  { value: '12', label: 'countries launched', detail: 'Europe and Australia, in four phased launches, on schedule.' },
   { value: '10 days → 12 hrs', label: 'incident detection', detail: 'Per-template bounce metrics replacing a silent failure.' },
 ];
 
@@ -118,7 +118,7 @@ export const arc: Role[] = [
       'Five microservices serving career-mobility features across fourteen ' +
       'countries and forty-odd locales.',
     work: [
-      'Led a twelve-country EMEA expansion across four phased launches, coordinating dependency teams in several organisations, then wrote the eight-step runbook that cut each later country launch by roughly 60%.',
+      'Led a twelve-country expansion across Europe and Australia in four phased launches, coordinating dependency teams in several organisations, then wrote the eight-step runbook that cut each later country launch by roughly 60%.',
       'Drove requirements for runtime country-level feature flags, turning a multi-day deployment cycle into a rollout or emergency rollback measured in minutes.',
       'Took a core service to full continuous-delivery certification in a week against a three-week estimate — reviewer gates, bake times, auto-rollback monitors, alarm coverage — then made it reusable, cutting the remaining pipeline work by about a third.',
       'Replaced brittle matching with a typed eligibility API across four GraphQL endpoints. Caching dropped downstream TPS by 66% and removed multi-second latency spikes; it also fixed an internationalisation defect where English-only patterns failed against localised job titles in twelve countries.',
@@ -133,7 +133,7 @@ export const arc: Role[] = [
     place: 'Seattle · across several teams',
     blurb: 'Career profile, internal mobility, and a stretch on seller logistics.',
     work: [
-      'Built the career-profile gateway and its data layer from inception, and co-designed the migration off a legacy third-party tool onto a three-tier serverless platform.',
+      'Tech lead for the career-profile platform, owning its end-to-end architecture: built the gateway and data layer from inception, and co-designed the migration off a legacy third-party tool onto a three-tier serverless platform.',
       'Built a configurable matching engine on a graph model so product managers could tune how candidates rank against roles without a code change, with override semantics on role, country and region composite keys.',
       'Delivered time-boxed delegation — TTL-based automatic access revocation over secondary-index query patterns — so managers could hand over talent-review access that expired on its own.',
       'Designed the metrics pipeline behind internal transfer analytics: database streams, event publishing, bulk backfill.',
@@ -153,7 +153,7 @@ export const arc: Role[] = [
       'Built the subscription model and an operations admin panel so non-technical teams could manage reward programmes without code changes.',
       'Delivered the Tax-Collected-at-Source compliance interceptor for India marketplace sellers, inside the government deadline.',
       'Built No-Cost EMI validation and opt-in for the seller promotions platform, later extended to mobile.',
-      'Authored the technical design for expanding a seller reimbursement claims system into new Middle East and North Africa marketplaces, and led QA coordination and production accounting validation for those launches.',
+      'Authored the technical design for expanding a seller reimbursement claims system into new Middle East and North Africa marketplaces — Saudi Arabia and Egypt, with a right-to-left Arabic interface — and led QA coordination and production accounting validation for those launches.',
       'Selected as Code Review Bar Raiser in training — the first junior engineer on the team — completing 225+ reviews.',
     ],
   },
@@ -175,6 +175,14 @@ export const arc: Role[] = [
 export interface Design { title: string; body: string }
 
 export const designs: Design[] = [
+  {
+    title: 'Recruiting-data service re-architecture',
+    body:
+      'A reporting API that pulled entire datasets into the service and filtered them ' +
+      'in code — heap pinned at 100%, and org-wide exports timing out at the gateway. ' +
+      'The proof of concept moved long exports to an asynchronous job that says when ' +
+      'the file is ready, built on federated queries.',
+  },
   {
     title: 'Assessment-failure notification pipeline',
     body:
@@ -239,6 +247,15 @@ export const ops: OpsItem[] = [
       'by feature gate, with thirteen action items and a five-whys behind it.',
   },
   {
+    title: 'An outage that kept a calendar',
+    body:
+      'Database connection-pool timeouts every couple of months, clearing on their own ' +
+      'within hours, with no root cause. Added performance insights, enhanced monitoring ' +
+      'and error-log shipping, right-sized the instances and added reader auto-scaling — ' +
+      'then lined the outages up against the database credential’s 60-day automatic ' +
+      'rotation. The service’s copy of the secret was falling out of sync each time.',
+  },
+  {
     title: 'An alarm audit that found the alarms were not connected',
     body:
       'Across five production services, four of five composite alarms routed to ' +
@@ -271,7 +288,7 @@ export const ops: OpsItem[] = [
 ];
 
 export const stack = [
-  { group: 'Languages', items: ['Java', 'TypeScript', 'Go', 'Kotlin', 'GraphQL', 'SQL'] },
+  { group: 'Languages', items: ['Java', 'Python', 'JavaScript / Node.js', 'TypeScript', 'Go', 'Kotlin', 'GraphQL', 'SQL'] },
   { group: 'AWS', items: ['Lambda', 'DynamoDB', 'DAX', 'AppSync', 'SQS', 'SNS', 'S3', 'CloudWatch', 'EventBridge', 'Step Functions', 'AppConfig', 'API Gateway', 'CloudFront', 'WAF', 'Route 53', 'KMS', 'IAM'] },
   { group: 'Patterns', items: ['Event-driven', 'Single-table DynamoDB', 'Schema-driven GraphQL', 'Serverless-first', 'FIFO + idempotent writes', 'Feature flagging', 'Infrastructure as code'] },
   { group: 'Tools', items: ['AWS CDK', 'Netflix DGS', 'Dagger 2', 'Guava', 'Spring Boot', 'React Native'] },
@@ -281,10 +298,21 @@ export const people: string[] = [
   'Around 300 code reviews a year, with feedback on race conditions, internationalisation regressions, monitoring gaps and security risk rather than formatting.',
   'Ran a promotion assessment across nine stakeholders including three principal engineers, and wrote evidence-based promotion feedback for several teammates.',
   'Interviewed for SDE and campus hiring across multiple quarters — coding, system design and behavioural.',
+  'Gave internal tech talks — the team’s first recorded one, on AWS Lambda; one Lambda behind every AppSync resolver, with gateway authentication and SnapStart; and querying Aurora through Athena federated queries.',
   'Mentored engineers through migrations, DynamoDB schema design and service onboarding without taking the work off them.',
   'Built the team wiki from scratch — services, runbooks, dev setup, architecture, dashboards — replacing tribal knowledge with something a new joiner could read.',
   'Drove AI-assisted development across engineering, product and data teams, including the guardrails that stop it doing damage.',
 ];
+
+export const before = {
+  education: 'IIT Kanpur — B.Tech, Computer Science and Engineering, 2012–2016.',
+  items: [
+    'Summer 2015 at Amazon in Bengaluru, interning on seller registration: a catalogue tool that turned a seller’s raw product data into a validated listing feed, variations and all. Full-time from July 2016.',
+    'Co-founded jutja.com, a project-management site that laid tasks out as mind maps, and built its front end.',
+    'Projects across computer vision, distributed systems, compilers and graphics — licence-plate detection on the campus surveillance feed, skyline queries on MapReduce, a Java-to-MIPS compiler, 3-D Tetris in OpenGL.',
+  ],
+  link: { label: 'Every IIT Kanpur project, in detail', href: '/projects/' },
+};
 
 export const ask = {
   lede: 'What I am looking for',
