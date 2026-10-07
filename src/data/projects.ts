@@ -59,9 +59,8 @@ export const projects: Project[] = [
     area: 'Internship · Amazon, Bengaluru',
     title: 'A catalogue builder for sellers',
     body:
-      'On the seller registration team: a tool that turned a seller’s raw product ' +
-      'data into a listing feed, variations and all, with validation and errors shown ' +
-      'in the UI, corrections and regeneration, and guidance for every attribute.',
+      'On a seller-facing team: a tool that turned raw product data into a validated ' +
+      'catalogue feed, with errors shown in the UI and guidance for every attribute.',
   },
   {
     when: 'Aug–Nov 2014',
