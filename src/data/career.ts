@@ -161,8 +161,6 @@ export const arc: Role[] = [
     work: [
       'Proposed, designed and built a unified multi-channel notification platform, then its WhatsApp channel end to end.',
       'Built the action handler behind those notifications, with an integration-test harness and a load-test pipeline.',
-      'Led a rewards service’s database migration and schema redesign; average API latency fell from 250ms to 40ms, and partial updates halved QA effort.',
-      'Built the subscription model and an operations admin panel so non-technical teams could manage reward programmes without code changes.',
       'Delivered a tax-compliance change for marketplace sellers inside the government deadline.',
       'Built validation and opt-in for a seller promotions feature, later extended to mobile.',
       'Authored the technical design for taking a seller claims programme into Saudi Arabia and Egypt, with a right-to-left Arabic interface, and led QA and accounting validation for those launches.',
@@ -173,12 +171,14 @@ export const arc: Role[] = [
     period: '2016–2018',
     title: 'Software Development Engineer',
     place: 'Bengaluru · registration & onboarding',
-    blurb: 'Seller onboarding, and India’s GST transition.',
+    blurb: 'Seller onboarding, rewards, and India’s GST transition.',
     work: [
       'Built a post-launch page for new sellers from scratch, and was first on the team to roll a change out gradually behind an experiment. It shipped with zero high-severity tickets.',
       'Built the analytics pipeline behind it, consolidating many files a day into one daily load.',
       'Worked on India’s GST transition across several seller-facing services, delivered three days ahead of the government deadline.',
       'Wrote the staging, validation and backfill tooling for that transition.',
+      'Led a rewards service’s database migration and schema redesign; average API latency fell from 250ms to 40ms, and partial updates halved QA effort.',
+      'Built the subscription model and an operations admin panel so non-technical teams could manage reward programmes without code changes.',
       'Mentored a six-month intern end to end, and gave the team’s first recorded tech talk, on serverless functions.',
     ],
   },
@@ -235,6 +235,37 @@ export const designs: Design[] = [
       'Argued that the caller’s resolved identity is already in the service logs, so ' +
       'enforcement needs no onboarding from callers — a distributed token bucket ' +
       'with shadow, enforce and fail-open rollout modes.',
+  },
+  {
+    title: 'Indexing live records by expiry, not status',
+    body:
+      'Moving a service off a relational database, the obvious index — status — would ' +
+      'have returned every expired record and left the filtering to code. Indexing on ' +
+      'expiry date returned only live records, with status filtered from a list the ' +
+      'caller passes. Multi-table joins became key lookups.',
+  },
+  {
+    title: 'Subscribing to delivery updates instead of polling for them',
+    body:
+      'Delivery status lived in another team’s service. Polling meant re-checking every ' +
+      'message ever sent and loading their service to do it; subscribing to its update ' +
+      'events delivered each change once. Update types we didn’t recognise were kept, ' +
+      'not dropped.',
+  },
+  {
+    title: 'One read instead of seven calls',
+    body:
+      'A generic interceptor ran before a busy page rendered, and its first design asked ' +
+      'seven services — about 800ms, and seven ways to fail. Each user’s status went ' +
+      'into one read-optimised store keyed by user: one lookup, one dependency.',
+  },
+  {
+    title: 'Seven blocks, one template, a flow that remembers',
+    body:
+      'A page’s seven independent blocks became fragments on one abstract template, so a ' +
+      'new block is configuration. The step completes itself on load so it shows exactly ' +
+      'once, users stay pinned to the flow they started in, and the rollout went behind ' +
+      'an experiment.',
   },
 ];
 
