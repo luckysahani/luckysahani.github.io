@@ -361,7 +361,7 @@ export const ask = {
   body:
     'Senior or Staff engineering roles, based in India, remote or hybrid. ' +
     'Distributed systems, platform work, or anything where owning the whole ' +
-    'lifecycle is the point. Applying from December 2026.',
+    'lifecycle is the point.',
   links: [
     { label: 'Email', href: 'mailto:luckythegreat4@gmail.com' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/luckysahani' },
