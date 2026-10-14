@@ -20,6 +20,14 @@ const diagrams = [NotificationPlatform, ProfilePlatform, ConfigSync, BounceMonit
     <p class="kicker">{thesis.kicker}</p>
     <h1>{thesis.headline}</h1>
     <p class="dek">{thesis.dek}</p>
+    <ul class="glance">
+      {thesis.glance.map((g) => <li>{g}</li>)}
+    </ul>
+    <p class="top-links">
+      {ask.links.map((l) => (
+        <a href={l.href} rel={l.href.startsWith('http') ? 'me noopener' : undefined}>{l.label}</a>
+      ))}
+    </p>
 
     <hr class="rule-line" />
 
@@ -181,6 +189,22 @@ const diagrams = [NotificationPlatform, ProfilePlatform, ConfigSync, BounceMonit
 <style>
   .career { padding: clamp(3rem, 8vw, 5.5rem) 0 0; }
   .sec-lede { color: var(--ink-soft); max-width: 58ch; }
+
+  /* ---- at a glance: titles and dates, then a way to get in touch ---- */
+  .glance {
+    list-style: none;
+    margin: 1.1rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1.4rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+  }
+  .top-links { margin: 0.9rem 0 1.6rem; display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; }
+  .top-links a { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
 
   /* ---- metrics ---- */
   .metrics {

@@ -27,25 +27,32 @@
  */
 
 export const thesis = {
-  kicker: 'Senior Software Engineer · Gurgaon',
+  kicker: 'Senior Software Development Engineer · Gurgaon',
   headline: 'Ten years of platforms with real users on the other end.',
   dek:
     'Amazon, 2016 to 2026, after an internship there in 2015. Bengaluru first — seller tools for the India ' +
     'marketplace — then Seattle, building internal career-mobility products ' +
-    'that ran in fourteen countries. Finished as a Senior SDE.',
+    'that ran in fourteen countries. Finished at the senior level, SDE III.',
+  // 3 — titles and dates where a recruiter looks first
+  glance: [
+    'SDE III · 2024–26',
+    'SDE II · 2018–24',
+    'SDE I · 2016–18',
+    'B.Tech CSE, IIT Kanpur · 2016',
+  ],
 };
 
 export interface Metric { value: string; label: string; detail: string }
 
 export const metrics: Metric[] = [
-  { value: '250ms → 40ms', label: 'API latency', detail: 'A rewards service, after a database migration and schema redesign.' },
+  { value: '250ms → 40ms', label: 'API latency', detail: 'After a database migration and schema redesign.' },
   { value: '20 → 5', label: 'tables', detail: 'The same redesign, built around key-based access.' },
-  { value: '66%', label: 'TPS reduction', detail: 'Downstream load, from a typed API with caching.' },
+  { value: '66%', label: 'TPS reduction', detail: 'Downstream load, after an API redesign.' },
   { value: '32 → 2 min', label: 'UI test time', detail: 'A 94% cut, across eight languages.' },
-  { value: '~800ms', label: 'latency removed', detail: 'An interceptor on a busy page: one cached read instead of seven service calls.' },
+  { value: '~800ms', label: 'latency removed', detail: 'Taken off a busy page’s render path.' },
   { value: '99%+', label: 'line coverage', detail: 'A notification platform, with 100% branch coverage.' },
   { value: '12', label: 'countries launched', detail: 'Europe and Australia, in four phased launches, on schedule.' },
-  { value: '10 days → 12 hrs', label: 'incident detection', detail: 'Per-template bounce metrics replacing a silent failure.' },
+  { value: '10 days → 12 hrs', label: 'incident detection', detail: 'For email failures that had been going unseen.' },
 ];
 
 export interface System { n: string; title: string; years: string; lede: string; hard: string; caption: string }
@@ -126,7 +133,7 @@ export interface Role { period: string; title: string; place: string; blurb: str
 export const arc: Role[] = [
   {
     period: '2024–2026',
-    title: 'Senior Software Development Engineer',
+    title: 'Senior Software Development Engineer (SDE III)',
     place: 'Seattle · career mobility',
     blurb: 'Career-mobility features across fourteen countries and forty-odd locales.',
     work: [
@@ -145,7 +152,7 @@ export const arc: Role[] = [
     place: 'Seattle · across several teams',
     blurb: 'Internal mobility products, and a stretch on seller logistics.',
     work: [
-      'Tech lead for an employee-facing platform, owning its end-to-end architecture from inception, including the move off a legacy third-party tool.',
+      'Tech lead for a new employee-facing platform — later live in fourteen countries — owning its architecture end to end from inception, including the move off the legacy third-party tool it replaced.',
       'Built a configurable matching engine so product managers could tune how candidates rank against roles without a code change.',
       'Delivered time-boxed delegation, so managers could hand over talent-review access that expired on its own.',
       'Designed the metrics pipeline behind internal-transfer analytics.',
@@ -164,12 +171,12 @@ export const arc: Role[] = [
       'Delivered a tax-compliance change for marketplace sellers inside the government deadline.',
       'Built validation and opt-in for a seller promotions feature, later extended to mobile.',
       'Authored the technical design for taking a seller claims programme into Saudi Arabia and Egypt, with a right-to-left Arabic interface, and led QA and accounting validation for those launches.',
-      'Selected as Code Review Bar Raiser in training — the first junior engineer on the team — completing 225+ reviews.',
+      'Selected to train as a code-review Bar Raiser — a reviewer trusted to hold the quality bar on other people’s changes — the first junior engineer on the team to be picked, with 225+ reviews.',
     ],
   },
   {
     period: '2016–2018',
-    title: 'Software Development Engineer',
+    title: 'Software Development Engineer I',
     place: 'Bengaluru · registration & onboarding',
     blurb: 'Seller onboarding, rewards, and India’s GST transition.',
     work: [
@@ -286,7 +293,7 @@ export const ops: OpsItem[] = [
       'A multi-hour failure during a live launch — root cause in 77 minutes, ' +
       'resolved in nine hours. And an outage traced to header handling in a ' +
       'reverse proxy, mitigated in 66 minutes behind a feature gate, with a ' +
-      'five-whys and thirteen action items behind it.',
+      'five-whys root-cause analysis and thirteen action items behind it.',
   },
   {
     title: 'An outage that kept a calendar',
@@ -316,15 +323,15 @@ export const ops: OpsItem[] = [
     title: 'Operational readiness as a standing cadence',
     body:
       'Owned five readiness reviews and served as change-management point of contact ' +
-      'for the platform — a change template, a monthly deployment SOP, Sev-2 ' +
-      'escalation criteria with quantified thresholds, and on-call procedures ' +
+      'for the platform — a change template, a monthly deployment SOP, escalation ' +
+      'criteria for high-severity incidents with quantified thresholds, and on-call procedures ' +
       'covering every launched country.',
   },
   {
     title: 'Planning that checks itself against production',
     body:
-      'Annual roadmap sizing where each intake was code-verified against what was ' +
-      'already shipped — which found one intake already complete and another needing ' +
+      'Annual roadmap sizing where each incoming request was checked against the code ' +
+      'already shipped — which found one request already complete and another needing ' +
       'no engineering from the team at all, and routed it to its real owner.',
   },
 ];
@@ -359,9 +366,9 @@ export const before = {
 export const ask = {
   lede: 'What I am looking for',
   body:
-    'Senior or Staff engineering roles, based in India, remote or hybrid. ' +
-    'Distributed systems, platform work, or anything where owning the whole ' +
-    'lifecycle is the point.',
+    'Senior engineering roles in Bengaluru — distributed systems, platform work, ' +
+    'or anything where owning the whole lifecycle is the point. Open to ' +
+    'conversations now.',
   links: [
     { label: 'Email', href: 'mailto:luckythegreat4@gmail.com' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/luckysahani' },
