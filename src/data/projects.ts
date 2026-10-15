@@ -30,11 +30,11 @@ export const projects: Project[] = [
     area: 'Machine learning',
     title: 'Object detection and classification in surveillance video',
     body:
-      'Separated moving objects from the background by frame differencing, cut them ' +
-      'out of each video, and trained multiclass classifiers on HOG features — SVM, ' +
-      'decision trees, random forests, AdaBoost and k-NN — to tell autos, rickshaws, ' +
-      'cars, bicycles, motorcycles, pedestrians and number plates apart.',
-    repos: ['MLT-Video-Classifier-Project'],
+      'A course project in a team of five: separated moving objects from the ' +
+      'background by frame differencing, cut them out of each video, and trained ' +
+      'multiclass classifiers on HOG features — SVM, decision trees, random forests, ' +
+      'AdaBoost and k-NN — to tell autos, rickshaws, cars, bicycles, motorcycles, ' +
+      'pedestrians and number plates apart.',
   },
   {
     when: 'Mar–Apr 2016',
@@ -79,7 +79,8 @@ export const projects: Project[] = [
     body:
       'Found the number plates on moving vehicles in the institute’s surveillance ' +
       'feed. A real-time adaptive Gaussian-mixture background model, with shadow ' +
-      'detection, threw away empty frames; Viola–Jones classified the vehicles; ' +
+      'detection, threw away empty frames — run on the open-source BGSLibrary; ' +
+      'Viola–Jones classified the vehicles; ' +
       'morphological operations isolated plate regions as the first step towards ' +
       'OCR — tuned to hold up through changes in light and weather.',
     repos: ['Image_processing'],
