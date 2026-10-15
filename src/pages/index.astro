@@ -25,8 +25,10 @@ const daysTo = Math.max(
 
 const now = [
   { k: 'Wedding', v: `${daysTo} days`, id: 'wed-count' },
-  { k: 'Next trip', v: nextTrip ? `${nextTrip.place}, ${nextTrip.when.replace(/^Late /, '')}` : '—' },
-  { k: 'Home since', v: 'July 2026' },
+  // The least recruiter-relevant line, so it is the one a narrow phone drops
+  // to keep the cards on the first screen.
+  { k: 'Next trip', v: nextTrip ? `${nextTrip.place}, ${nextTrip.when.replace(/^Late /, '')}` : '—', wideOnly: true },
+  { k: 'Looking for', v: 'Senior roles in Bengaluru' },
 ];
 
 // Each card previews its page with that page's own material rather than a
@@ -59,26 +61,27 @@ const sections = [
 ---
 
 <Base
-  title="Lucky Sahani"
-  description="Engineer in Gurgaon. Ten years at Amazon, most of them in Seattle. Lists of games, places and anime, and the work behind them."
+  title="Lucky Sahani — Senior Software Development Engineer"
+  description="Senior software development engineer in Gurgaon — ten years at Amazon building distributed systems, open to Senior roles in Bengaluru. Plus the lists: games, places and anime."
   bare
 >
   <div class="home">
     <section class="hero">
       <div class="hero-main">
-        <p class="eyebrow reveal" style="--d:0ms">Gurgaon, India</p>
+        <p class="eyebrow reveal" style="--d:0ms">Senior Software Development Engineer · Gurgaon</p>
 
         <h1 class="name reveal" style="--d:60ms">Lucky<br />Sahani</h1>
 
         <div class="intro reveal" style="--d:140ms">
           <p class="lede">
             Engineer. Ten years at Amazon, most of them in Seattle — home again
-            now, and getting married in November.
+            now, with a wedding in November 2026.
           </p>
           <p>
-            I keep lists. Games I fully intend to get to, places I have been,
-            anime I am several seasons behind on. This site is mostly those
-            lists, and the work that paid for them.
+            I build platforms with real users on the other end — four are drawn
+            on the <a href="/career/">career page</a>. Beside the work I keep lists:
+            games I fully intend to get to, places I have been, anime I am
+            several seasons behind on.
           </p>
           <p class="reach">
             {contact.map((c) => <a href={c.href} rel={c.rel}>{c.label}</a>)}
@@ -94,7 +97,7 @@ const sections = [
 
         <dl class="now">
           {now.map((n) => (
-            <div>
+            <div class={n.wideOnly ? 'now-wide' : undefined}>
               <dt>{n.k}</dt>
               <dd id={n.id}>{n.v}</dd>
             </div>
@@ -459,7 +462,7 @@ const sections = [
         'intro   intro'
         'now     now';
       column-gap: 1rem;
-      row-gap: 0.9rem;
+      row-gap: 0.75rem;
       padding: 1.5rem 0 1.25rem;
     }
     .hero-main, .hero-side { display: contents; }
@@ -474,10 +477,15 @@ const sections = [
       flex-wrap: wrap;
       gap: 0.6rem 1rem;
       margin: 0.3rem 0 0;
-      padding-top: 0.75rem;
+      padding-top: 0.6rem;
     }
     .now dd { font-size: 0.9rem; }
     .now-mark { display: none; }
-    .card-art { height: 7.5rem; }
+    .card-art { height: 7rem; }
+  }
+  @media (max-width: 520px) {
+    /* the full title on one line on a phone */
+    .eyebrow { letter-spacing: 0.08em; }
+    .now-wide { display: none; }
   }
 </style>
