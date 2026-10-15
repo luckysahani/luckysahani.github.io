@@ -112,7 +112,7 @@ export const projects: Project[] = [
       'Sorted the public Enron corpus into categories with a bag-of-words model — ' +
       'multiclass SVM, naive Bayes and random forests, with POS tagging and stemming — ' +
       'in Python with NLTK, scikit-learn and Weka, plus a Gmail prototype in Apps ' +
-      'Script. Up to 80% accuracy on balanced sets, as low as 45% on noisier ones.',
+      'Script. Up to 80% accuracy on balanced sets.',
   },
   {
     when: 'Jan–Mar 2013',
